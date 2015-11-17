@@ -1,5 +1,5 @@
 //
-//  Deck.hpp
+//  Deck.h
 //  Blackjack
 //
 //  Created by Gordon Freeman on 11/17/15.
@@ -26,7 +26,7 @@ public:
     Deck();
     ~Deck();
     void Shuffle();
-    char getCard();
+    string getCard();
 };
 
 #endif /* Deck_hpp */

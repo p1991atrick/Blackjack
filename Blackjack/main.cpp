@@ -7,13 +7,13 @@
 //
 
 #include <iostream>
-#include "Deck.h"
+#include "BlackJackPlay.h"
 using std::cout;
 int main(int argc, const char * argv[]) {
     
     std::cout << "Hello, World!\n";
     Deck deckone;
-    int i =2, j = 9;
+    int i =1, j = 9;
     
     cout << deckone.Card::getCard(&i, &j) << std::endl;
     

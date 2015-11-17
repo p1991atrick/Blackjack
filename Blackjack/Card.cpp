@@ -10,7 +10,25 @@
 
 
 
-char Card::getCard(int* s, int* f) const
+std::string Card::getCard(int* s, int* f) const
 {
-    return cards[*s][*f];
+    std::string tempstring;
+    tempstring = cards[*s][*f];
+    if(*s == 0)
+    {
+        tempstring = tempstring + " of Clubs";
+    }
+    if(*s == 1)
+    {
+        tempstring = tempstring + " of Dimonds";
+    }
+    if(*s == 2)
+    {
+        tempstring = tempstring + " of Hearts";
+    }
+    if(*s == 3)
+    {
+        tempstring = tempstring + " of Spades";
+    }
+    return tempstring;
 }

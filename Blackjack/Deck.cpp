@@ -27,7 +27,7 @@ Deck::~Deck()
     //delete deckarray[52];
 }
 
-char Deck::getCard()
+string Deck::getCard()
 {
     //generate random seed
     srand(int(time(NULL)));
@@ -44,6 +44,7 @@ char Deck::getCard()
             j = rand()%13;
         }
     }while (deckarray[i][j] == true);
+    deckarray[i][j] = true;
     return Card::getCard(&i, &j);
 }
 

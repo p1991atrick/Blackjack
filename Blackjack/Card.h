@@ -1,5 +1,5 @@
 //
-//  Card.hpp
+//  Card.h
 //  Blackjack
 //
 //  Created by Gordon Freeman on 11/17/15.
@@ -23,7 +23,7 @@ class Card
         {'2', '3', '4', '5', '6', '7', '8', '9', 'J', 'Q', 'K', 'A'},};
 
 public:
-    char getCard(int* s, int* f) const;
+    string getCard(int* s, int* f) const;
 };
 
 #endif /* Card_hpp */
