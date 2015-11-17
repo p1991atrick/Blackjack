@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F8547A331BFBAD4B0052A835 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A321BFBAD4B0052A835 /* main.cpp */; };
 		F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A391BFBAE080052A835 /* Deck.cpp */; };
+		F8547A411BFBBFFB0052A835 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A3F1BFBBFFB0052A835 /* Card.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +28,9 @@
 		F8547A2F1BFBAD4B0052A835 /* Blackjack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Blackjack; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8547A321BFBAD4B0052A835 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F8547A391BFBAE080052A835 /* Deck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Deck.cpp; sourceTree = "<group>"; };
-		F8547A3A1BFBAE080052A835 /* Deck.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Deck.hpp; sourceTree = "<group>"; };
+		F8547A3A1BFBAE080052A835 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		F8547A3F1BFBBFFB0052A835 /* Card.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
+		F8547A401BFBBFFB0052A835 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +65,9 @@
 			children = (
 				F8547A321BFBAD4B0052A835 /* main.cpp */,
 				F8547A391BFBAE080052A835 /* Deck.cpp */,
-				F8547A3A1BFBAE080052A835 /* Deck.hpp */,
+				F8547A3A1BFBAE080052A835 /* Deck.h */,
+				F8547A3F1BFBBFFB0052A835 /* Card.cpp */,
+				F8547A401BFBBFFB0052A835 /* Card.h */,
 			);
 			path = Blackjack;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8547A411BFBBFFB0052A835 /* Card.cpp in Sources */,
 				F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */,
 				F8547A331BFBAD4B0052A835 /* main.cpp in Sources */,
 			);
