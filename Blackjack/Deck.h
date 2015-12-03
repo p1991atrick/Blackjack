@@ -9,24 +9,33 @@
 #ifndef Deck_h
 #define Deck_h
 
-#include "Card.h"
+
 #include <ostream>
-#include <string>
 #include <vector>
 #include <ctime>
 #include <cstdlib>
 using std::string;
-using std::vector;
 
-class Deck : public Card
+class Deck
 {
+    //variables
+    int ii;
+    int* i; //suite
+    int jj;
+    int* j; //value
+                // i , j
     bool deckarray[4][13];
-    
+//private functions
+    void getValue() ;
+    void getSuite() ;
+    void CardUsed();
 public:
     Deck();
     ~Deck();
-    void Shuffle();
     string getCard();
+    int return_i() const;
+    int return_j() const;
+    void shuffle();
 };
 
 #endif /* Deck_hpp */
