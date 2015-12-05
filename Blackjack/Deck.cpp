@@ -15,6 +15,7 @@ Deck::Deck()
 {
     i= &ii;
     j= &jj;
+    shuffleyet = 0;
     Deck::shuffle();
     //generate random seed
     srand(int(time(NULL)));
@@ -27,11 +28,14 @@ Deck::~Deck()
 
 void Deck::getValue()
 {
-    
+    if (shuffleyet > 20)
+    {
+        shuffle();
+    }
     //rand ints
     //do while loop to only use new cards
     do{
-        sleep(1);
+        //sleep(1);
         *j = ((rand()*rand())%13);
         if(*j < 0)
             *j = *j * -1;
@@ -42,7 +46,6 @@ void Deck::getSuite()
 {
     //rand int
     do{
-        //sleep(.2335333);
         *i = (rand()%4);
     }while(*i >= 4);
 }
@@ -52,9 +55,8 @@ void Deck::CardUsed()
 {
     do{
     //run verify for rand card
-    getSuite();
-    //sleep(1);
     getValue();
+    getSuite();
     }while (deckarray[*i][*j] == true);
     deckarray[*i][*j] = true;
 }
@@ -63,6 +65,7 @@ std::string Deck::getCard()
 {
     //find open card
     CardUsed();
+    shuffleyet++;
     //print what it is
     std::string tempstring;
     {//find value

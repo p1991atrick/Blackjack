@@ -37,6 +37,7 @@ int main(int argc, char * argv[])
     bool havep3;
     havep2 = false;
     havep3 = false;
+    
     //the game
     Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3);
     Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3);
@@ -152,10 +153,10 @@ void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3
 void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
 {
     cout << Playertemp.nameout() << "'s  turn:\n";
-    system( "read -n 1 -s -p \"Press any key to return to continue...\"" );
-    cout << "Here are your Cards,\n";
+    system( "read -n 1 -s -p \"Press any key to return to continue...\"\n" );
+    cout << "\nHere are your Cards,\n";
     cout << Playertemp.returncards() << std::endl;
-    cout <<"for a total of " << Playertemp.returnTotal() << std::endl;
+    cout <<"for a total of: " << Playertemp.returnTotal() << std::endl << std::endl;
     if(Playertemp.returnTotal() == 21)
     {
         cout << "You have Blackjack and win!\n";
@@ -163,14 +164,14 @@ void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
     else
     {
         do{
-            cout << "Whould you like to hit or Stay? \n";
+            cout << "Would you like to hit or Stay? \n";
             std::cin >> hitstay;
             if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
             {
                 Playertemp.hit(dealer.givecard());
                 Playertemp.calctotal(dealer.givevalue());
                 cout << "Your new cards are: \n";
-                cout <<  Playertemp.returncards() << "\nAnd the total is: " << Playertemp.returnTotal() << std::endl;
+                cout <<  Playertemp.returncards() << "\nAnd the total is: " << Playertemp.returnTotal() << std::endl << std::endl;
                 if(Playertemp.returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
@@ -185,29 +186,31 @@ void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
         }while (hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h");
         
     }
-    system( "read -n 1 -s -p \"Press any key to return to continue...\"" );
+    system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
 }
 
 void dealerturn(Dealer &dealer,string &hitstay)
 {
-    cout << "The Dealer will now play...\n\n";
+    system("clear");
+    cout << "\nThe Dealer will now play...\n\n";
     cout << "here are the Dealer's cards:\n";
     cout << dealer.returncards() << std::endl;
-    cout << "for a total of " <<  dealer.returntotal() << std::endl;
+    cout << "for a total of: " <<  dealer.returntotal() << std::endl << std::endl;
+    system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     if (dealer.returntotal() == 21)
     {
         cout << "Dealer has Blackjack!\n\n";
-        system( "read -n 1 -s -p \"Press any key to return to continue...\"" );
+        system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     }
     else if (dealer.returntotal() < 17)
     {
         do{
-            cout << "Dealer must take another card:\n";
+            cout << "\nDealer must take another card:\n";
             dealer.hit(dealer.givecard());
             dealer.calctotal(dealer.givevalue());
             cout << "The dealers new cards are:\n";
             cout << dealer.returncards() << std::endl;
-            cout << "and the total is: " << dealer.returntotal() << std::endl;
+            cout << "and the total is: " << dealer.returntotal() << std::endl << std::endl;
             if(dealer.returntotal() > 21)
             {
                 cout << "Dealer busts!\n";
@@ -216,7 +219,7 @@ void dealerturn(Dealer &dealer,string &hitstay)
             {
                 cout << "Dealer has Blackjack!\n";
             }
-            system( "read -n 1 -s -p \"Press any key to return to continue...\"" );
+            system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
         }while (dealer.returntotal() < 17);
     }
 }
@@ -226,7 +229,7 @@ void Display_Board(Player &Player1, Player &Player2, Player &Player3, Dealer &de
     system("clear");
     cout << std::setw(25) << std::right << "Here is the Board\n\n";
     cout << std::setw(20) << std::right << "Dealer has\n";
-    cout << std::setw(20) << std::right <<  dealer.returncard1() << std::endl;
+    cout << std::setw(20) << std::right <<  dealer.returncard1() << std::endl << std::endl;
     
 }
 
@@ -255,39 +258,6 @@ void Display_Board_end(Player &Player1, Player &Player2, Player &Player3, Dealer
 void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3)
 {
     bool p1 = false, p2 = false, p3 = false;
-    //dealer bust
-    if(dealer.returntotal() > 21)
-    {
-        if (Player1.returnTotal() <= 21)
-        {
-            cout << Player1.nameout() << " Wins\n";
-        }
-        if (Player2.returnTotal() <= 21 && *havep2 == true)
-        {
-            cout << Player2.nameout() << " Wins\n";
-        }
-        if (Player3.returnTotal() <= 21 && *havep3 == true)
-        {
-            cout << Player3.nameout() << " Wins\n";
-        }
-    }
-    //dealer has 21
-    if(dealer.returntotal() == 21)
-    {
-        cout << "Dealer Wins\n";
-        if (Player1.returnTotal() == 21)
-        {
-            cout << Player1.nameout() << " Wins\n";
-        }
-        if (Player2.returnTotal() == 21 && *havep2 == true)
-        {
-            cout << Player2.nameout() << " Wins\n";
-        }
-        if (Player3.returnTotal() == 21 && *havep3 == true)
-        {
-            cout << Player3.nameout() << " Wins\n";
-        }
-    }
     //dealer has < 21
     if(dealer.returntotal() <21)
     {
@@ -308,10 +278,47 @@ void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, 
         }
         if(p1 == false && p2 == false && p3 == false)
         {
-            cout << "Dealer Wins\n";
+            if (Player1.returnTotal() == dealer.returntotal() || Player2.returnTotal() == dealer.returntotal() || Player3.returnTotal() == dealer.returntotal())
+            {
+                cout << "Draw.\n";
+            }
+            else
+                cout << "Dealer Wins\n";
         }
     }
-
+    //dealer bust
+    else if(dealer.returntotal() > 21)
+    {
+        if (Player1.returnTotal() <= 21)
+        {
+            cout << Player1.nameout() << " Wins\n";
+        }
+        if (Player2.returnTotal() <= 21 && *havep2 == true)
+        {
+            cout << Player2.nameout() << " Wins\n";
+        }
+        if (Player3.returnTotal() <= 21 && *havep3 == true)
+        {
+            cout << Player3.nameout() << " Wins\n";
+        }
+    }
+    //dealer has 21
+    else if(dealer.returntotal() == 21)
+    {
+        cout << "Dealer Wins\n";
+        if (Player1.returnTotal() == 21)
+        {
+            cout << Player1.nameout() << " Wins\n";
+        }
+        if (Player2.returnTotal() == 21 && *havep2 == true)
+        {
+            cout << Player2.nameout() << " Wins\n";
+        }
+        if (Player3.returnTotal() == 21 && *havep3 == true)
+        {
+            cout << Player3.nameout() << " Wins\n";
+        }
+    }
 }
 
 

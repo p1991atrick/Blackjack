@@ -77,10 +77,17 @@ void Player::calctotal(int x)
     else if (x==12)
     {
         if(total < 11)
+        {
             total+=11;
+            hasAce = true;
+        }
         else
             total +=1;
-        hasAce = true;
+    }
+    if (total > 21 && hasAce == true)
+    {
+        total -= 10;
+        hasAce = false;
     }
 }
 

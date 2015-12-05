@@ -19,6 +19,7 @@ using std::string;
 class Deck
 {
     //variables
+    int shuffleyet;
     int ii;
     int* i; //suite
     int jj;
