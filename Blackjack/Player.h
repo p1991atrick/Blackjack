@@ -14,8 +14,7 @@ using std::string;
 
 class Player
 {   //ints to hold the count 
-    int* total;
-    int localtotal;
+    int total;
     string name;
     string card1;
     string card2;
@@ -23,18 +22,24 @@ class Player
     string card4;
     string card5;
     bool hasAce;
-    
+    //private functions
+    std::string Card1() const;
+    std::string Card2() const;
+    std::string Card3() const;
+    std::string Card4() const;
+    std::string Card5() const;
 public:
     Player();
+    Player(string);
     ~Player();
-    //std::string DealCard();
+    void calctotal(int);
     void stay();
-    void hit();
-    int CardTotal();
-    void namein();
-    std::string nameout();
-    
-    
+    void hit(string);
+    int CardTotal(int);
+    std::string nameout()const;
+    std::string returncards();
+    void setname(string);
+    int returnTotal();
 };
 
 #endif /* BlackJackDealer_hpp */

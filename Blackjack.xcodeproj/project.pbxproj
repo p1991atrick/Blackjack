@@ -108,6 +108,7 @@
 				TargetAttributes = {
 					F8547A2E1BFBAD4B0052A835 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = F25C92T5RZ;
 					};
 				};
 			};
@@ -160,7 +161,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: p1991atrick@me.com (8G49645642)";
+				CODE_SIGN_IDENTITY = "Mac Developer: p1991atrick@me.com (8G49645642)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -182,6 +183,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "69135a59-4c7d-4f85-a057-5838fc599b92";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -203,7 +205,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: p1991atrick@me.com (8G49645642)";
+				CODE_SIGN_IDENTITY = "Mac Developer: p1991atrick@me.com (8G49645642)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -218,6 +220,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "69135a59-4c7d-4f85-a057-5838fc599b92";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -225,14 +228,20 @@
 		F8547A371BFBAD4B0052A835 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		F8547A381BFBAD4B0052A835 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

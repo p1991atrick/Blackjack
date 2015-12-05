@@ -22,7 +22,7 @@ Deck::Deck()
 
 Deck::~Deck()
 {
-    delete[] &deckarray;
+   // delete[] &deckarray;
 }
 
 void Deck::getValue()
@@ -62,8 +62,6 @@ void Deck::CardUsed()
 std::string Deck::getCard()
 {
     //find open card
-    getSuite();
-    getCard();
     CardUsed();
     //print what it is
     std::string tempstring;
