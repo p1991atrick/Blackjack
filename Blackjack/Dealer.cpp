@@ -74,54 +74,40 @@ int Dealer::returntotal() const
 
 std::string Dealer::returncard1()
 {
-   return Card1();
+   return card1;
 }
 
 std::string Dealer::returncards()
 {
     std::string tempstring;
-    tempstring += Card1();
+    tempstring += card1;
     tempstring += ", ";
-    tempstring += Card2();
+    tempstring += card2;
     if(card3 != "0")
     {
         tempstring += ", ";
-        tempstring += Card3();
+        tempstring += card3;
     }
     if (card4 != "0")
     {
         tempstring += ", ";
-        tempstring += Card4();
+        tempstring += card4;
     }
     if (card5 != "0")
     {
         tempstring += ", ";
-        tempstring += Card5();
+        tempstring += card5;
     }
     return tempstring;
 }
 
-string Dealer::Card1() const
+void Dealer::reset()
 {
-    return card1;
-    
-}
-string Dealer::Card2() const
-{
-    return card2;
-    
-}
-string Dealer::Card3() const
-{
-    return card3;
-    
-}
-string Dealer::Card4() const
-{
-    return card4;
-    
-}
-string Dealer::Card5() const
-{
-    return card5;
+    card1 = "0";
+    card2 = "0";
+    card3 = "0";
+    card4 = "0";
+    card5 = "0";
+    total = 0;
+    hasAce = false;
 }

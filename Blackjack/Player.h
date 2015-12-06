@@ -22,12 +22,6 @@ class Player
     string card4;
     string card5;
     bool hasAce;
-    //private functions
-    std::string Card1() const;
-    std::string Card2() const;
-    std::string Card3() const;
-    std::string Card4() const;
-    std::string Card5() const;
 public:
     Player();
     Player(string);
@@ -40,6 +34,8 @@ public:
     std::string returncards();
     void setname(string);
     int returnTotal();
+    void reset();
+    
 };
 
 #endif /* BlackJackDealer_hpp */

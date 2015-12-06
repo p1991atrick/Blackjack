@@ -21,12 +21,6 @@ class Dealer
     string card4;
     string card5;
     bool hasAce;
-    //private functions
-    std::string Card1() const;
-    std::string Card2() const;
-    std::string Card3() const;
-    std::string Card4() const;
-    std::string Card5() const;
     
 public:
     Dealer();
@@ -39,6 +33,7 @@ public:
     int cardtotal(int);
     std::string returncards();
     std::string returncard1();
+    void reset();
 };
 
 #endif /* Dealer_h */

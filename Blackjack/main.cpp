@@ -18,7 +18,7 @@ using std::cout;
 //function prototypes
 string CLI_Args(int argc, char * argv[]);
 void Help();
-void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1);
+void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1, char * goagain);
 void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1);
 void Display_Board(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
 void Display_Board_end(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
@@ -40,13 +40,17 @@ int main(int argc, char * argv[])
     bool havep3;
     havep2 = false;
     havep3 = false;
+    char goagain = 'N';
     
     //the game
-    Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
-    Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
-    Display_Board_end(Player1, Player2, Player3, dealer, &havep2, &havep3);
-    Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);
-    
+    do{
+        Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1, &goagain);
+        Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
+        Display_Board_end(Player1, Player2, Player3, dealer, &havep2, &havep3);
+        Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);
+        cout << "\n\nGo Again?   (y,N)\n";
+        std::cin >> goagain;
+    }while (goagain == 'y' || goagain == 'Y');
     return 0;
 }
 
@@ -87,36 +91,59 @@ void Help()
     exit(5);
 }
 
-void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool * havep2, bool * havep3, Deck &deck1)
+void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool * havep2, bool * havep3, Deck &deck1, char * goagain)
 {
     
     int numofplayers;
-    std::queue <string> PLAYERS;
+    
     deck1.shuffle();
-    do{
-        cout << "How many Players? (1-3)\n";
-        std::cin >> numofplayers;
-    }while (numofplayers < 1 || numofplayers > 3);
     
     //build players
-    for(int i = 0; i< numofplayers; i++)
+    if(*goagain == 'n' || *goagain == 'N')
     {
-        std::string tempplayer;
-        cout << "Enter name of player " << i+1 << ": ";
-        std::cin >> tempplayer;
-        PLAYERS.push (tempplayer);
-        if (i==1)
-            *havep2 = true;
-        if (i==2)
-            *havep3 = true;
+        std::queue <string> PLAYERS;
+        do{
+            cout << "How many Players? (1-3)\n";
+            std::cin >> numofplayers;
+        }while (numofplayers < 1 || numofplayers > 3);
+
+        for(int i = 0; i< numofplayers; i++)
+        {
+            std::string tempplayer;
+            cout << "Enter name of player " << i+1 << ": ";
+            std::cin >> tempplayer;
+            PLAYERS.push (tempplayer);
+            if (i==1)
+                *havep2 = true;
+            if (i==2)
+                *havep3 = true;
+        }
+        Player1.setname(PLAYERS.front());
+        if(*havep2 == true)
+        {
+            PLAYERS.pop();
+            Player2.setname(PLAYERS.front());
+        }
+        if(*havep3 == true)
+        {
+            PLAYERS.pop();
+            Player3.setname(PLAYERS.front());
+        }
+        
     }
-    Player1.setname(PLAYERS.front());
-    if(*havep2 == true)
-        PLAYERS.pop();
-        Player2.setname(PLAYERS.front());
-    if(*havep3 == true)
-        PLAYERS.pop();
-        Player3.setname(PLAYERS.front());
+    if(*goagain == 'y' || *goagain == 'Y')
+    {
+        dealer.reset();
+        Player1.reset();
+        if(*havep2 == true)
+        {
+            Player2.reset();
+        }
+        if(*havep3 ==true)
+        {
+            Player3.reset();
+        }
+    }
     
     //start game deal
     int x=0;
