@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F81277AC1BFBDCC90052A835 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F81277AA1BFBDCC90052A835 /* Player.cpp */; };
+		F836CFDA1C13CFE50052A835 /* Savegame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F836CFD81C13CFE50052A835 /* Savegame.cpp */; };
 		F8547A331BFBAD4B0052A835 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A321BFBAD4B0052A835 /* main.cpp */; };
 		F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A391BFBAE080052A835 /* Deck.cpp */; };
 		F8D94AA21C10D8F50052A835 /* Dealer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8D94AA01C10D8F50052A835 /* Dealer.cpp */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		F81277AA1BFBDCC90052A835 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		F81277AB1BFBDCC90052A835 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		F836CFD81C13CFE50052A835 /* Savegame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Savegame.cpp; sourceTree = "<group>"; };
+		F836CFD91C13CFE50052A835 /* Savegame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Savegame.h; sourceTree = "<group>"; };
 		F8547A2F1BFBAD4B0052A835 /* Blackjack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Blackjack; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8547A321BFBAD4B0052A835 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F8547A391BFBAE080052A835 /* Deck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Deck.cpp; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				F8547A321BFBAD4B0052A835 /* main.cpp */,
+				F836CFD81C13CFE50052A835 /* Savegame.cpp */,
+				F836CFD91C13CFE50052A835 /* Savegame.h */,
 				F8D94AA01C10D8F50052A835 /* Dealer.cpp */,
 				F8D94AA11C10D8F50052A835 /* Dealer.h */,
 				F81277AA1BFBDCC90052A835 /* Player.cpp */,
@@ -136,6 +141,7 @@
 			files = (
 				F8D94AA21C10D8F50052A835 /* Dealer.cpp in Sources */,
 				F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */,
+				F836CFDA1C13CFE50052A835 /* Savegame.cpp in Sources */,
 				F8547A331BFBAD4B0052A835 /* main.cpp in Sources */,
 				F81277AC1BFBDCC90052A835 /* Player.cpp in Sources */,
 			);

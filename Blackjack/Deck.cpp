@@ -15,7 +15,6 @@ Deck::Deck()
 {
     i= &ii;
     j= &jj;
-    shuffleyet = 0;
     Deck::shuffle();
     //generate random seed
     srand(int(time(NULL)));
@@ -28,10 +27,6 @@ Deck::~Deck()
 
 void Deck::getValue()
 {
-    if (shuffleyet > 20)
-    {
-        shuffle();
-    }
     //rand ints
     //do while loop to only use new cards
     do{

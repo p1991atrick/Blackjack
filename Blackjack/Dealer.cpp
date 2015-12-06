@@ -32,15 +32,6 @@ Dealer::~Dealer()
 //    delete[] &card5;
 }
 
-std::string Dealer::givecard()
-{
-    return deckone.getCard();
-}
-
-int Dealer::givevalue()
-{
-    return deckone.return_j();
-}
 
 void Dealer::hit(string card)
 {
@@ -110,11 +101,6 @@ std::string Dealer::returncards()
     return tempstring;
 }
 
-int Dealer::cardtotal(int x)
-{
-    return total;
-}
-
 string Dealer::Card1() const
 {
     return card1;
@@ -125,7 +111,6 @@ string Dealer::Card2() const
     return card2;
     
 }
-
 string Dealer::Card3() const
 {
     return card3;
@@ -139,5 +124,4 @@ string Dealer::Card4() const
 string Dealer::Card5() const
 {
     return card5;
-    
 }

@@ -9,12 +9,11 @@
 #ifndef Dealer_h
 #define Dealer_h
 
-#include "Deck.h"
+#include <ostream>
 using std::string;
 
 class Dealer
 {
-    Deck deckone;
     unsigned int total;
     string card1;
     string card2;

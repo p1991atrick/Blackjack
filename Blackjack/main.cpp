@@ -9,19 +9,21 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <queue>
 #include "Player.h"
 #include "Dealer.h"
+#include "Deck.h"
 using std::cout;
 
 //function prototypes
 string CLI_Args(int argc, char * argv[]);
 void Help();
-void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3);
+void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1);
+void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1);
 void Display_Board(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
 void Display_Board_end(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
-void Playerturn(Player &Player1, Dealer &dealer, string &hitstay);
-void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3);
-void dealerturn(Dealer &dealer,string &hitstay);
+void Playerturn(Player &Player1, Deck &deck1);
+void dealerturn(Dealer &dealer, Deck &deck1);
 void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3);
 
 
@@ -33,14 +35,15 @@ int main(int argc, char * argv[])
     Player Player1;
     Player Player2;
     Player Player3;
+    Deck deck1;
     bool havep2;
     bool havep3;
     havep2 = false;
     havep3 = false;
     
     //the game
-    Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3);
-    Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3);
+    Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
+    Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
     Display_Board_end(Player1, Player2, Player3, dealer, &havep2, &havep3);
     Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);
     
@@ -84,74 +87,79 @@ void Help()
     exit(5);
 }
 
-void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool * havep2, bool * havep3)
+void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool * havep2, bool * havep3, Deck &deck1)
 {
     
     int numofplayers;
-    string PLAYERS[4];
+    std::queue <string> PLAYERS;
+    deck1.shuffle();
     do{
-    cout << "How many Players? (1-3)\n";
-    std::cin >> numofplayers;
+        cout << "How many Players? (1-3)\n";
+        std::cin >> numofplayers;
     }while (numofplayers < 1 || numofplayers > 3);
     
     //build players
     for(int i = 0; i< numofplayers; i++)
     {
+        std::string tempplayer;
         cout << "Enter name of player " << i+1 << ": ";
-        std::cin >> PLAYERS[i];
+        std::cin >> tempplayer;
+        PLAYERS.push (tempplayer);
         if (i==1)
             *havep2 = true;
         if (i==2)
             *havep3 = true;
     }
-    Player1.setname(PLAYERS[0]);
+    Player1.setname(PLAYERS.front());
     if(*havep2 == true)
-        Player2.setname(PLAYERS[1]);
+        PLAYERS.pop();
+        Player2.setname(PLAYERS.front());
     if(*havep3 == true)
-        Player3.setname(PLAYERS[2]);
+        PLAYERS.pop();
+        Player3.setname(PLAYERS.front());
     
     //start game deal
     int x=0;
     cout << "Dealing....."<< std::endl;
     do{
-        dealer.hit(dealer.givecard());
-        dealer.calctotal(dealer.givevalue());
-        Player1.hit(dealer.givecard());
-        Player1.calctotal(dealer.givevalue());
+        dealer.hit(deck1.getCard());
+        dealer.calctotal(deck1.return_j());
+        Player1.hit(deck1.getCard());
+        Player1.calctotal(deck1.return_j());
         if(*havep2 == true)
         {
-            Player2.hit(dealer.givecard());
-            Player2.calctotal(dealer.givevalue());
+            Player2.hit(deck1.getCard());
+            Player2.calctotal(deck1.return_j());
         }
         if(*havep3 == true)
         {
-            Player3.hit(dealer.givecard());
-            Player3.calctotal(dealer.givevalue());
+            Player3.hit(deck1.getCard());
+            Player3.calctotal(deck1.return_j());
         }
         x++;
     }while(x<2);
 }
 
-void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3)
+void Game_play(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3, Deck &deck1)
 {
-    string hitstay = "stay";
     Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-    Playerturn(Player1, dealer, hitstay);
+    Playerturn(Player1, deck1);
     if(*havep2 == true)
     {
         Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-        Playerturn(Player2, dealer, hitstay);
+        Playerturn(Player2, deck1);
     }
     if(*havep3 == true)
     {
         Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-        Playerturn(Player3, dealer, hitstay);
+        Playerturn(Player3, deck1);
     }
-    dealerturn(dealer, hitstay);
+    dealerturn(dealer, deck1);
 }
 
-void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
+void Playerturn(Player &Playertemp, Deck &deck1)
 {
+    string hitstay = "stay";
     cout << Playertemp.nameout() << "'s  turn:\n";
     system( "read -n 1 -s -p \"Press any key to return to continue...\"\n" );
     cout << "\nHere are your Cards,\n";
@@ -168,8 +176,8 @@ void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
             std::cin >> hitstay;
             if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
             {
-                Playertemp.hit(dealer.givecard());
-                Playertemp.calctotal(dealer.givevalue());
+                Playertemp.hit(deck1.getCard());
+                Playertemp.calctotal(deck1.return_j());
                 cout << "Your new cards are: \n";
                 cout <<  Playertemp.returncards() << "\nAnd the total is: " << Playertemp.returnTotal() << std::endl << std::endl;
                 if(Playertemp.returnTotal() > 21)
@@ -189,8 +197,9 @@ void Playerturn(Player &Playertemp, Dealer &dealer, string &hitstay)
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
 }
 
-void dealerturn(Dealer &dealer,string &hitstay)
+void dealerturn(Dealer &dealer, Deck &deck1)
 {
+    
     system("clear");
     cout << "\nThe Dealer will now play...\n\n";
     cout << "here are the Dealer's cards:\n";
@@ -206,8 +215,8 @@ void dealerturn(Dealer &dealer,string &hitstay)
     {
         do{
             cout << "\nDealer must take another card:\n";
-            dealer.hit(dealer.givecard());
-            dealer.calctotal(dealer.givevalue());
+            dealer.hit(deck1.getCard());
+            dealer.calctotal(deck1.return_j());
             cout << "The dealers new cards are:\n";
             cout << dealer.returncards() << std::endl;
             cout << "and the total is: " << dealer.returntotal() << std::endl << std::endl;
@@ -320,17 +329,6 @@ void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, 
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
