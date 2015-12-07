@@ -10,5 +10,11 @@
 #define Savegame_h
 
 #include <stdio.h>
+#include "Player.h"
+#include "Dealer.h"
 
+class Savegame
+{
+    
+};
 #endif /* Savegame_h */

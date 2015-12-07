@@ -5,11 +5,32 @@
 //  Created by Gordon Freeman on 12/3/15.
 //  Copyright © 2015 Patrick Kelly. All rights reserved.
 //
-
+/* -----------------------------------------------------------------------------
+ 
+ FILE:              Dealer.cpp
+ 
+ DESCRIPTION:       Impimantation for Dealer.h class
+ 
+ COMPILER:          GNU++11, MVS
+ 
+ NOTES:             Put other information here ...
+ 
+ MODIFICATION HISTORY:
+ 
+ Author                  Date               Version
+ ---------------         ----------         --------------
+ Programmer Name         YYYY-MM-DD         Version Number
+ 
+ ----------------------------------------------------------------------------- */
 #include "Dealer.h"
 #include "Deck.h"
 
-
+/* -----------------------------------------------------------------------------
+ FUNCTION:          Dealer::Dealer()
+ DESCRIPTION:       Constructor
+ RETURNS:           Void function
+ NOTES:             
+ ----------------------------------------------------------------------------- */
 Dealer::Dealer()
 {
     total = 0;

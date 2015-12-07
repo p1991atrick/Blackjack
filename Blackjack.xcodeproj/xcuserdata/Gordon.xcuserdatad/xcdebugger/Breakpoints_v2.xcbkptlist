@@ -94,9 +94,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "main(int argc, char * argv[])"
-            landmarkType = "7">
+            endingLineNumber = "32">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,9 +108,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "Game_setup(Dealer &amp;dealer, Player &amp;Player1, Player &amp;Player2, Player &amp;Player3, bool * havep2, bool * havep3, Deck &amp;deck1, char * goagain)"
-            landmarkType = "7">
+            endingLineNumber = "102">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,7 +155,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
             endingLineNumber = "274"
-            landmarkName = "Display_Board_end(Player &amp;Player1, Player &amp;Player2, Player &amp;Player3, Dealer &amp;dealer, bool *havep2, bool *havep3)"
+            landmarkName = "dealerturn(Dealer &amp;dealer, Deck &amp;deck1)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +171,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
             endingLineNumber = "295"
-            landmarkName = "Winners(Dealer &amp;dealer, Player &amp;Player1, Player &amp;Player2, Player &amp;Player3, bool *havep2, bool *havep3)"
+            landmarkName = "Display_Board_end(Player &amp;Player1, Player &amp;Player2, Player &amp;Player3, Dealer &amp;dealer, bool *havep2, bool *havep3)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -207,7 +203,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
             endingLineNumber = "71"
-            landmarkName = "CLI_Args(int argc, char * argv[])"
+            landmarkName = "main(int argc, char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -222,9 +218,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "main(int argc, char * argv[])"
-            landmarkType = "7">
+            endingLineNumber = "47">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

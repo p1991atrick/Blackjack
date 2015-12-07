@@ -6,6 +6,24 @@
 //  Copyright © 2015 Patrick Kelly. All rights reserved.
 //
 
+/* -----------------------------------------------------------------------------
+ 
+ FILE:              main.cpp
+ 
+ DESCRIPTION:       driver for blackjack (21) game
+ 
+ COMPILER:          GNU++11, MVS
+ 
+ NOTES:             Might have build errors on MVS, but should still run
+ 
+ MODIFICATION HISTORY:
+ 
+ Author                  Date               Version
+ ---------------         ----------         --------------
+ Patrick Kelly           2015-12-1          Under Source Control
+ 
+ ----------------------------------------------------------------------------- */
+
 #include <iostream>
 #include <iomanip>
 #include <string>
