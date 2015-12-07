@@ -99,7 +99,7 @@ std::string Deck::getCard()
         }
         else if (*i == 1)
         {
-            tempstring = tempstring + " of Dimonds";
+            tempstring = tempstring + " of Diamonds";
         }
         else if (*i == 2)
         {
