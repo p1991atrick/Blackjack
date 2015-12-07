@@ -206,7 +206,7 @@ void Playerturn(Player &Playertemp, Deck &deck1)
 {
     string hitstay = "stay";
     cout << Playertemp.nameout() << "'s  turn:\n";
-    system( "read -n 1 -s -p \"Press any key to return to continue...\"\n" );
+    system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     cout << "\nHere are your Cards,\n";
     cout << Playertemp.returncards() << std::endl;
     cout <<"for a total of: " << Playertemp.returnTotal() << std::endl << std::endl;
