@@ -1,5 +1,5 @@
 //
-//  Dealer.hpp
+//  Dealer.h
 //  Blackjack
 //
 //  Created by Gordon Freeman on 12/3/15.

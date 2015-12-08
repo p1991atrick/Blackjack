@@ -1,13 +1,13 @@
 //
-//  BlackJackDealer.h
+//  Player.h
 //  Blackjack
 //
 //  Created by Gordon Freeman on 11/17/15.
 //  Copyright © 2015 Patrick Kelly. All rights reserved.
 //
 
-#ifndef BlackJackDealer_h
-#define BlackJackDealer_h
+#ifndef Player_h
+#define Player_h
 
 #include <ostream>
 using std::string;

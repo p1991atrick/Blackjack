@@ -20,7 +20,7 @@
  
  Author                  Date               Version
  ---------------         ----------         --------------
- Patrick Kelly           2015-12-1          Under Source Control
+ Patrick Kelly           2015-12-1          Under git Source Control
  
  ----------------------------------------------------------------------------- */
 
@@ -31,6 +31,7 @@
 #include "Player.h"
 #include "Dealer.h"
 #include "Deck.h"
+#include "Savegame.h"
 using std::cout;
 
 //function prototypes
@@ -47,7 +48,8 @@ void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, 
 
 int main(int argc, char * argv[])
 {
-    std::string savefile = CLI_Args(argc, argv);
+    //Savegame<Player> SavePlayers;
+    //SavePlayers.setfilename(CLI_Args(argc, argv));
     //Dealer and vars
     Dealer dealer;
     Player Player1;
@@ -66,6 +68,10 @@ int main(int argc, char * argv[])
         Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
         Display_Board_end(Player1, Player2, Player3, dealer, &havep2, &havep3);
         Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);
+        //SavePlayers.appendNode(Player1);
+        //SavePlayers.appendNode(Player2);
+        //SavePlayers.appendNode(Player3);
+        //SavePlayers.appendNode(dealer);
         cout << "\n\nGo Again?   (y,N)\n";
         std::cin >> goagain;
     }while (goagain == 'y' || goagain == 'Y');

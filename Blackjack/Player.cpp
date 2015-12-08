@@ -1,5 +1,5 @@
 //
-//  BlackJackDealer.cpp
+//  Player.cpp
 //  Blackjack
 //
 //  Created by Gordon Freeman on 11/17/15.
