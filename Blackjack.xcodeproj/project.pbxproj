@@ -24,6 +24,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		F88D73AA1C17A64C0052A835 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -35,12 +44,20 @@
 		F8547A321BFBAD4B0052A835 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F8547A391BFBAE080052A835 /* Deck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Deck.cpp; sourceTree = "<group>"; };
 		F8547A3A1BFBAE080052A835 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		F88D73AC1C17A64C0052A835 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D94AA01C10D8F50052A835 /* Dealer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dealer.cpp; sourceTree = "<group>"; };
 		F8D94AA11C10D8F50052A835 /* Dealer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dealer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F8547A2C1BFBAD4B0052A835 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F88D73A91C17A64C0052A835 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -62,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				F8547A2F1BFBAD4B0052A835 /* Blackjack */,
+				F88D73AC1C17A64C0052A835 /* Test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,18 +120,38 @@
 			productReference = F8547A2F1BFBAD4B0052A835 /* Blackjack */;
 			productType = "com.apple.product-type.tool";
 		};
+		F88D73AB1C17A64C0052A835 /* Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F88D73B01C17A64C0052A835 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildPhases = (
+				F88D73A81C17A64C0052A835 /* Sources */,
+				F88D73A91C17A64C0052A835 /* Frameworks */,
+				F88D73AA1C17A64C0052A835 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test;
+			productName = Test;
+			productReference = F88D73AC1C17A64C0052A835 /* Test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		F8547A271BFBAD4B0052A835 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Patrick Kelly";
 				TargetAttributes = {
 					F8547A2E1BFBAD4B0052A835 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = F25C92T5RZ;
+					};
+					F88D73AB1C17A64C0052A835 = {
+						CreatedOnToolsVersion = 7.1.1;
 					};
 				};
 			};
@@ -130,6 +168,7 @@
 			projectRoot = "";
 			targets = (
 				F8547A2E1BFBAD4B0052A835 /* Blackjack */,
+				F88D73AB1C17A64C0052A835 /* Test */,
 			);
 		};
 /* End PBXProject section */
@@ -144,6 +183,13 @@
 				F836CFDA1C13CFE50052A835 /* Savegame.cpp in Sources */,
 				F8547A331BFBAD4B0052A835 /* main.cpp in Sources */,
 				F81277AC1BFBDCC90052A835 /* Player.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F88D73A81C17A64C0052A835 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +235,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "69135a59-4c7d-4f85-a057-5838fc599b92";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -226,7 +272,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "69135a59-4c7d-4f85-a057-5838fc599b92";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -234,8 +280,8 @@
 		F8547A371BFBAD4B0052A835 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -244,10 +290,30 @@
 		F8547A381BFBAD4B0052A835 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		F88D73B11C17A64C0052A835 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "-";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F88D73B21C17A64C0052A835 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "-";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -268,6 +334,15 @@
 			buildConfigurations = (
 				F8547A371BFBAD4B0052A835 /* Debug */,
 				F8547A381BFBAD4B0052A835 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F88D73B01C17A64C0052A835 /* Build configuration list for PBXNativeTarget "Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F88D73B11C17A64C0052A835 /* Debug */,
+				F88D73B21C17A64C0052A835 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

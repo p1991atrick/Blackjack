@@ -8,10 +8,10 @@
 
 #include "Savegame.h"
 
+
 template <class T>
 Savegame<T>::Savegame()
 {
-    file = "null";
     head = nullptr;
 }
 

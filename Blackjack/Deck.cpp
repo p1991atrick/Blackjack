@@ -18,6 +18,20 @@ Deck::Deck()
     Deck::shuffle();
     //generate random seed
     srand(int(time(NULL)));
+    //fill vector with string values
+    cards.push_back("Two of ");
+    cards.push_back("Three of ");
+    cards.push_back("Four of ");
+    cards.push_back("Five of ");
+    cards.push_back("Six of ");
+    cards.push_back("Seven of ");
+    cards.push_back("Eight of ");
+    cards.push_back("Nine of ");
+    cards.push_back("Ten of ");
+    cards.push_back("Jack of ");
+    cards.push_back("Queen of ");
+    cards.push_back("King of ");
+    cards.push_back("Ace of ");
 }
 
 Deck::~Deck()
@@ -60,54 +74,26 @@ std::string Deck::getCard()
 {
     //find open card
     CardUsed();
-    shuffleyet++;
     //print what it is
     std::string tempstring;
-    {//find value
-        if(*j == 0)
-            tempstring = "2";
-        else if (*j == 1)
-            tempstring = "3";
-        else if (*j == 2)
-            tempstring = "4";
-        else if (*j == 3)
-            tempstring = "5";
-        else if (*j == 4)
-            tempstring = "6";
-        else if (*j == 5)
-            tempstring = "7";
-        else if (*j == 6)
-            tempstring = "8";
-        else if (*j == 7)
-            tempstring = "9";
-        else if (*j == 8)
-            tempstring = "10";
-        else if (*j == 9)
-            tempstring = "Jack";
-        else if (*j == 10)
-            tempstring = "Queen";
-        else if (*j == 11)
-            tempstring = "King";
-        else if (*j == 12)
-            tempstring = "Ace";
-    }
-
+    
+    tempstring = cards[*j];
     {//find suite
         if(*i == 0)
         {
-            tempstring = tempstring + " of Clubs";
+            tempstring = tempstring + "Clubs";
         }
         else if (*i == 1)
         {
-            tempstring = tempstring + " of Diamonds";
+            tempstring = tempstring + "Diamonds";
         }
         else if (*i == 2)
         {
-            tempstring = tempstring + " of Hearts";
+            tempstring = tempstring + "Hearts";
         }
         else if (*i == 3)
         {
-            tempstring = tempstring + " of Spades";
+            tempstring = tempstring + "Spades";
         }
     }
     return tempstring;

@@ -5,7 +5,6 @@
 //  Created by Gordon Freeman on 11/17/15.
 //  Copyright © 2015 Patrick Kelly. All rights reserved.
 //
-
 /* -----------------------------------------------------------------------------
  
  FILE:              main.cpp
@@ -21,7 +20,6 @@
  Author                  Date               Version
  ---------------         ----------         --------------
  Patrick Kelly           2015-12-1          Under git Source Control
- 
  ----------------------------------------------------------------------------- */
 
 #include <iostream>
@@ -48,8 +46,7 @@ void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, 
 
 int main(int argc, char * argv[])
 {
-    //Savegame<Player> SavePlayers;
-    //SavePlayers.setfilename(CLI_Args(argc, argv));
+    string filename = (CLI_Args(argc, argv));
     //Dealer and vars
     Dealer dealer;
     Player Player1;
@@ -67,11 +64,7 @@ int main(int argc, char * argv[])
         Game_setup(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1, &goagain);
         Game_play(dealer, Player1, Player2, Player3, &havep2, &havep3, deck1);
         Display_Board_end(Player1, Player2, Player3, dealer, &havep2, &havep3);
-        Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);
-        //SavePlayers.appendNode(Player1);
-        //SavePlayers.appendNode(Player2);
-        //SavePlayers.appendNode(Player3);
-        //SavePlayers.appendNode(dealer);
+        Winners(dealer, Player1, Player2, Player3, &havep2, &havep3);   
         cout << "\n\nGo Again?   (y,N)\n";
         std::cin >> goagain;
     }while (goagain == 'y' || goagain == 'Y');
@@ -127,8 +120,9 @@ void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player
     {
         std::queue <string> PLAYERS;
         do{
-            cout << "How many Players? (1-3)\n";
-            std::cin >> numofplayers;
+            numofplayers = ((rand()%2)+2);
+            //cout << "How many Players? (1-3)\n";
+            //std::cin >> numofplayers;
         }while (numofplayers < 1 || numofplayers > 3);
 
         for(int i = 0; i< numofplayers; i++)

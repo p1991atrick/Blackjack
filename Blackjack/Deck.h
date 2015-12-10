@@ -19,13 +19,14 @@ using std::string;
 class Deck
 {
     //variables
-    int shuffleyet;
     int ii;
     int* i; //suite
     int jj;
     int* j; //value
                 // i , j
     bool deckarray[4][13];
+    std::vector<std::string> cards;
+    
 //private functions
     void getValue() ;
     void getSuite() ;

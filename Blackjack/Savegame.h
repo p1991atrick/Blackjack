@@ -9,7 +9,9 @@
 #ifndef Savegame_h
 #define Savegame_h
 
-#include <ostream>
+#include <iostream>
+#include "Dealer.h"
+#include "Player.h"
 using std::string;
 //using std::cout;
 
@@ -17,7 +19,6 @@ using std::string;
 template <class T>
 class Savegame
 {
-    string file;
     struct Save
     {
         T value;
@@ -33,6 +34,5 @@ public:
     void insertNode(T);
     void deleteNode(T);
     void displayList() const;
-    //void setfilename(string);
 };
 #endif /* Savegame_h */
