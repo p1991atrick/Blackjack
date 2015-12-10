@@ -27,16 +27,20 @@
 #include <iomanip>
 #include <string>
 #include <queue>
+#include <fstream>
 #include "Player.h"
 #include "Dealer.h"
 #include "Deck.h"
 #include "Savegame.h"
 using std::cout;
+using std::string;
+using std::ios;
+using std::fstream;
 
 //function prototypes
 string CLI_Args(int argc, char * argv[]);
 void Help();
-void Game();
+void Game(string *filename);
 void Game_setup(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3, Deck *deck1, char * goagain);
 void Game_play(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3, Deck *deck1);
 void Display_Board(Player *Player1, Player *Player2, Player *Player3, Dealer *dealer, bool *havep2, bool *havep3);
@@ -44,13 +48,13 @@ void Display_Board_end(Player *Player1, Player *Player2, Player *Player3, Dealer
 void Playerturn(Player *Player1, Deck *deck1);
 void dealerturn(Dealer *dealer, Deck *deck1);
 void Winners(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3);
-void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3);
+void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3, string *filename);
 
 
 int main(int argc, char * argv[])
 {
     string filename = (CLI_Args(argc, argv));
-    Game();
+    Game(&filename);
     return 0;
 }
 
@@ -82,7 +86,7 @@ string CLI_Args(int argc, char * argv[])
     return "none";
 }
 
-void Game()
+void Game(string *filename)
 {
     //Dealer and vars setup
     Dealer dealer;
@@ -102,7 +106,7 @@ void Game()
         Game_play(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3, &deck1);
         Display_Board_end(&Player1, &Player2, &Player3, &dealer, &havep2, &havep3);
         Winners(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3);
-        Save_game(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3);
+        Save_game(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3, filename);
         cout << "\n\nGo Again?   (y,N)\n";
         std::cin >> goagain;
     }while (goagain == 'y' || goagain == 'Y');
@@ -215,8 +219,12 @@ void Game_play(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3
     dealerturn(dealer, deck1);
 }
 
-void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool * havep2, bool * havep3)
+void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool * havep2, bool * havep3, string *filename)
 {
+    fstream savefile;
+    string newfilename = *filename;
+    savefile.open(newfilename);
+    
     
 }
 
