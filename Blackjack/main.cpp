@@ -53,7 +53,8 @@ void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3
 
 int main(int argc, char * argv[])
 {
-    string filename = (CLI_Args(argc, argv));
+    string filename = "temp";
+    filename = (CLI_Args(argc, argv));
     Game(&filename);
     return 0;
 }
