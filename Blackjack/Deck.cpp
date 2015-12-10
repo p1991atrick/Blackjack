@@ -36,7 +36,7 @@ Deck::Deck()
 
 Deck::~Deck()
 {
-   // delete[] &deckarray;
+    //delete[] deckarray;
 }
 
 void Deck::getValue()

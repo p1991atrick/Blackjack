@@ -9,30 +9,51 @@
 #ifndef Savegame_h
 #define Savegame_h
 
-#include <iostream>
-#include "Dealer.h"
+#include <ostream>
+//#include "Dealer.h"
 #include "Player.h"
 using std::string;
-//using std::cout;
 
 
-template <class T>
-class Savegame
+
+template <class Player>
+class DynStack
 {
-    struct Save
+private:
+    // Structure for stack nodes
+    struct StackNode
     {
-        T value;
-        struct Save *next;
+        Player value;        // Value in the node
+        StackNode *next;  // Pointer to the next node
     };
-    Save *head;
-public:
-    Savegame();
-    ~Savegame();
     
-    //linked list ops
-    void appendNode(T);
-    void insertNode(T);
-    void deleteNode(T);
-    void displayList() const;
+    StackNode *top;      // Pointer to the stack top
+    
+public:
+    // Constructor
+    DynStack();
+    
+    // Destructor
+    ~DynStack();
+    
+    // Stack operations
+    void push( Player );
+    void pop( Player & );
+    bool isEmpty();
 };
+
+
+
+template < class T >
+bool DynStack<T>::isEmpty()
+{
+    bool status;
+    
+    if (!top)
+        status = true;
+    else
+        status = false;
+    
+    return status;
+}
 #endif /* Savegame_h */

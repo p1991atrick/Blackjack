@@ -44,13 +44,13 @@ Dealer::Dealer()
 
 Dealer::~Dealer()
 {
-//    delete[] &total;
-//    delete[] &hasAce;
-//    delete[] &card2;
-//    delete[] &card1;
-//    delete[] &card3;
-//    delete[] &card4;
-//    delete[] &card5;
+//    delete &total;
+//    delete &hasAce;
+//    delete &card2;
+//    delete &card1;
+//    delete &card3;
+//    delete &card4;
+//    delete &card5;
 }
 
 

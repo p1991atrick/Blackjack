@@ -10,118 +10,51 @@
 
 
 template <class T>
-Savegame<T>::Savegame()
+DynStack<T>::DynStack()
 {
-    head = nullptr;
+    top = 0; 
 }
 
-template <class T>
-Savegame<T>::~Savegame()
+
+template < class T >
+DynStack<T>::~DynStack()
 {
-    Save *nodePtr;
-    Save *nextNode;
+    StackNode *nodePtr, *nextNode;
     
-    nodePtr = head;
+    // Position nodePtr at the top of the stack.
+    nodePtr = top;
     
-    while (nodePtr != nullptr)
+    // Traverse the list deleting each node.
+    while (nodePtr != 0)
     {
         nextNode = nodePtr->next;
         delete nodePtr;
         nodePtr = nextNode;
     }
 }
-//template <class T>
-//void Savegame<T>::setfilename(string filename)
-//{
-//    file = filename;
-//}
 
-template <class T>
-void Savegame<T>::appendNode(T newValue)
-{
-    
-    Save *newNode;
-    Save *nodePtr;
-    //allocate new node and store data there
-    newNode = new Save;
-    newNode->value = newValue;
-    newNode->next = nullptr;
-    //if no nodes, make new begining
-    if (!head)
-    {
-        head = newNode;
-    }
-    else
-    {
-        nodePtr = head;
-        
-        while (nodePtr->next)
-        {
-            nodePtr = nodePtr->next;
-        }
-        
-        nodePtr->next = newNode;
-    }
-    
-}
 
-template <class T>
-void Savegame<T>::displayList() const
+template < class T >
+void DynStack<T>::push( T Player )
 {
-    Save *nodePtr;
-    nodePtr = head;
+    StackNode *newNode; // Pointer to a new node
     
-    while (nodePtr)
+    // Allocate a new node and store num there.
+    newNode = new StackNode;
+    newNode->value = Player;
+    
+    // If there are no nodes in the list
+    // make newNode the first node.
+    if (isEmpty())
     {
-        //std::cout << nodePtr->value << std::endl;
-        
-        nodePtr = nodePtr->next;
+        top = newNode;
+        newNode->next = 0;
+    }
+    else  // Otherwise, insert NewNode before top.
+    {
+        newNode->next = top;
+        top = newNode;
     }
 }
-
-template <class T>
-void Savegame<T>::insertNode(T newValue)
-{
-    Save *nodePtr;
-    Save *newNode;
-    Save * previousNode = nullptr;
-    
-    newNode = new Save;
-    newNode->value = newValue;
-    
-    if (!head)
-    {
-        head = newNode;
-        newNode->next = nullptr;
-    }
-    else
-    {
-        nodePtr = head;
-        
-        previousNode = nullptr;
-        
-        while (nodePtr != nullptr && nodePtr->value < newValue)
-        {
-            previousNode = nodePtr;
-            nodePtr = nodePtr->next;
-        }
-        
-        if (previousNode == nullptr)
-        {
-            head = newNode;
-            newNode->next = nodePtr;
-        }
-        else
-        {
-            previousNode->next = newNode;
-            newNode->next = nodePtr;
-        }
-    }
-}
-
-
-
-
-
 
 
