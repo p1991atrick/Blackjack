@@ -33,7 +33,6 @@
 #include "Deck.h"
 #include "Savegame.h"
 using std::cout;
-using std::string;
 using std::ios;
 using std::fstream;
 
@@ -223,8 +222,7 @@ void Game_play(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3
 void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool * havep2, bool * havep3, string *filename)
 {
     fstream savefile;
-    string newfilename = *filename;
-    savefile.open(newfilename);
+    savefile.open(filename->c_str(), std::ios::out);
     
     
 }
@@ -244,7 +242,7 @@ void Playerturn(Player *Playertemp, Deck *deck1)
     else
     {
         do{
-            cout << "Would you like to hit or Stay? \n";
+            cout << "Would you like to Hit or Stay? \n";
             std::cin >> hitstay;
             if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
             {
