@@ -10,50 +10,27 @@
 #define Savegame_h
 
 #include <ostream>
-//#include "Dealer.h"
-#include "Player.h"
 using std::string;
 
-
-
-template <class Player>
-class DynStack
+template <class T>
+class save
 {
 private:
-    // Structure for stack nodes
-    struct StackNode
-    {
-        Player value;        // Value in the node
-        StackNode *next;  // Pointer to the next node
-    };
+    T *stackArray;
+    int stackSize;
+    int top;
     
-    StackNode *top;      // Pointer to the stack top
     
 public:
-    // Constructor
-    DynStack();
-    
-    // Destructor
-    ~DynStack();
-    
-    // Stack operations
-    void push( Player );
-    void pop( Player & );
-    bool isEmpty();
+    save(int);
+    save(const save&);
+    ~save();
+    void push(T);
+    void pop(T &);
+    bool isfull();
+    bool isempty();
 };
 
 
 
-template < class T >
-bool DynStack<T>::isEmpty()
-{
-    bool status;
-    
-    if (!top)
-        status = true;
-    else
-        status = false;
-    
-    return status;
-}
 #endif /* Savegame_h */

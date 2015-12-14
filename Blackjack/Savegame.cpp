@@ -10,51 +10,70 @@
 
 
 template <class T>
-DynStack<T>::DynStack()
+save<T>::save(int size)
 {
-    top = 0; 
+    stackArray = new T[size];
+    
+}
+
+template < class T >
+save<T>::save(const save &obj)
+{
+    if(obj.stackSize > 0)
+        stackArray = new T[obj.stackSize];
+    else
+        stackArray = nullptr;
+    
+}
+
+template <class T>
+save<T>::~save()
+{
+    if (stackSize > 0)
+        delete [] stackArray;
 }
 
 
 template < class T >
-DynStack<T>::~DynStack()
+void save<T>::push(T item)
 {
-    StackNode *nodePtr, *nextNode;
-    
-    // Position nodePtr at the top of the stack.
-    nodePtr = top;
-    
-    // Traverse the list deleting each node.
-    while (nodePtr != 0)
-    {
-        nextNode = nodePtr->next;
-        delete nodePtr;
-        nodePtr = nextNode;
-    }
+    top++;
+    stackArray[top] = item;
+}
+
+template<class T>
+void save<T>::pop(T &item)
+{
+    item = stackArray[top];
+    top--;
 }
 
 
 template < class T >
-void DynStack<T>::push( T Player )
+bool save<T>::isfull()
 {
-    StackNode *newNode; // Pointer to a new node
+    bool status;
     
-    // Allocate a new node and store num there.
-    newNode = new StackNode;
-    newNode->value = Player;
+    if (top == stackSize -1)
+        status = true;
+    else
+        status = false;
     
-    // If there are no nodes in the list
-    // make newNode the first node.
-    if (isEmpty())
-    {
-        top = newNode;
-        newNode->next = 0;
-    }
-    else  // Otherwise, insert NewNode before top.
-    {
-        newNode->next = top;
-        top = newNode;
-    }
+    return status;
+}
+
+
+template < class T >
+bool save<T>::isempty()
+{
+    bool status;
+    
+    if (top == -1)
+        status = true;
+    else
+        status = false;
+    
+    return status;
 }
 
 

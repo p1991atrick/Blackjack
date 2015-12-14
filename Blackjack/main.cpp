@@ -133,10 +133,7 @@ void Game_setup(Dealer *dealer, Player *Player1, Player *Player2, Player *Player
     {
         std::queue <string> PLAYERS;
         do{
-            
             numofplayers = (rand()%4);
-            
-            
             //cout << "How many Players? (1-3)\n";
             //std::cin >> numofplayers;
         }while (numofplayers < 1 || numofplayers > 3);
@@ -224,7 +221,27 @@ void Save_game(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3
     fstream savefile;
     savefile.open(filename->c_str(), std::ios::out);
     
+    save<std::string> savegame(13);
+    savegame.push("Dealer");
+    savegame.push(dealer->returncards());
+    savegame.push("Player1");
+    savegame.push(Player1->nameout());
+    savegame.push(Player1->returncards());
+    if (*havep2 == true)
+    {
+        savegame.push("Player2");
+        savegame.push(Player2->nameout());
+        savegame.push(Player2->returncards());
+    }
+    if (*havep3 == true)
+    {
+        savegame.push("Player3");
+        savegame.push(Player3->nameout());
+        savegame.push(Player3->returncards());
+    }
     
+    savefile << "Blackjack Save File\n";
+    savefile << &savegame;
 }
 
 void Playerturn(Player *Playertemp, Deck *deck1)
