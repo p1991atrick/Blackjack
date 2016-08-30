@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include "myString.h"
+#include <string>
 #include "Player.h"
 #include "Dealer.h"
 using std::cout;
@@ -27,7 +27,7 @@ void Winners(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, 
 
 int main(int argc, char * argv[])
 {
-    std::string savefile = CLI_Args(argc, argv);
+	std::string savefile = CLI_Args(argc, argv);
     //Dealer and vars
     Dealer dealer;
     Player Player1;
