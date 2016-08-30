@@ -14,7 +14,7 @@ using std::string;
 
 class Dealer
 {
-    Deck deckone;
+    Deck blackjackDeck[6];
     unsigned int total;
     string card1;
     string card2;
@@ -22,6 +22,7 @@ class Dealer
     string card4;
     string card5;
     bool hasAce;
+	int decknumber;
     //private functions
     std::string Card1() const;
     std::string Card2() const;

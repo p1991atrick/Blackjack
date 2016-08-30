@@ -34,12 +34,13 @@ Dealer::~Dealer()
 
 std::string Dealer::givecard()
 {
-    return deckone.getCard();
+	decknumber = rand() % 6;
+    return blackjackDeck[decknumber].getCard();
 }
 
 int Dealer::givevalue()
 {
-    return deckone.return_j();
+    return blackjackDeck[decknumber].return_j();
 }
 
 void Dealer::hit(string card)

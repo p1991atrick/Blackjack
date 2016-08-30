@@ -28,7 +28,7 @@ Deck::~Deck()
 
 void Deck::getValue()
 {
-    if (shuffleyet > 20)
+    if (shuffleyet > 35)
     {
         shuffle();
     }

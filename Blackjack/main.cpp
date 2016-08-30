@@ -61,7 +61,7 @@ string CLI_Args(int argc, char * argv[])
             {
                 Help();
             }
-            if (strcmp(arg, "--Output-file")==0)
+            if (strcmp(arg, "--output-file")==0)
             {
                 i++;
                 return argv[i];
@@ -88,7 +88,7 @@ void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player
 {
     
     int numofplayers;
-    string PLAYERS[4];
+    string PLAYERS[3];
     do{
     cout << "How many Players? (1-3)\n";
     std::cin >> numofplayers;
