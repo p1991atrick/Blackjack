@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD823F1E1D7619AF0052A835 /* myString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD823F1C1D7619AF0052A835 /* myString.cpp */; };
 		F81277AC1BFBDCC90052A835 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F81277AA1BFBDCC90052A835 /* Player.cpp */; };
 		F8547A331BFBAD4B0052A835 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A321BFBAD4B0052A835 /* main.cpp */; };
 		F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8547A391BFBAE080052A835 /* Deck.cpp */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD823F1C1D7619AF0052A835 /* myString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = myString.cpp; sourceTree = "<group>"; };
+		CD823F1D1D7619AF0052A835 /* myString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myString.h; sourceTree = "<group>"; };
 		F81277AA1BFBDCC90052A835 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		F81277AB1BFBDCC90052A835 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		F8547A2F1BFBAD4B0052A835 /* Blackjack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Blackjack; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +76,8 @@
 				F81277AB1BFBDCC90052A835 /* Player.h */,
 				F8547A391BFBAE080052A835 /* Deck.cpp */,
 				F8547A3A1BFBAE080052A835 /* Deck.h */,
+				CD823F1C1D7619AF0052A835 /* myString.cpp */,
+				CD823F1D1D7619AF0052A835 /* myString.h */,
 			);
 			path = Blackjack;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD823F1E1D7619AF0052A835 /* myString.cpp in Sources */,
 				F8D94AA21C10D8F50052A835 /* Dealer.cpp in Sources */,
 				F8547A3B1BFBAE080052A835 /* Deck.cpp in Sources */,
 				F8547A331BFBAD4B0052A835 /* main.cpp in Sources */,

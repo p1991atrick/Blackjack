@@ -8,14 +8,14 @@
 
 #include <iostream>
 #include <iomanip>
-#include <string>
+#include "myString.h"
 #include "Player.h"
 #include "Dealer.h"
 using std::cout;
 
 //function prototypes
-string CLI_Args(int argc, char * argv[]);
 void Help();
+string CLI_Args(int argc, char * argv[]);
 void Game_setup(Dealer &dealer, Player &Player1, Player &Player2, Player &Player3, bool *havep2, bool *havep3);
 void Display_Board(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
 void Display_Board_end(Player &Player1, Player &Player2, Player &Player3, Dealer &dealer, bool *havep2, bool *havep3);
@@ -196,16 +196,19 @@ void dealerturn(Dealer &dealer,string &hitstay)
     cout << "here are the Dealer's cards:\n";
     cout << dealer.returncards() << std::endl;
     cout << "for a total of: " <<  dealer.returntotal() << std::endl << std::endl;
+	if (dealer.returntotal() < 16)
+	{
+		cout << "\nDealer doesn't have 16 and must take another card:\n";
+	}
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     if (dealer.returntotal() == 21)
     {
         cout << "Dealer has Blackjack!\n\n";
         system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     }
-    else if (dealer.returntotal() < 17)
+    else if (dealer.returntotal() < 16)
     {
         do{
-            cout << "\nDealer must take another card:\n";
             dealer.hit(dealer.givecard());
             dealer.calctotal(dealer.givevalue());
             cout << "The dealers new cards are:\n";
@@ -238,19 +241,19 @@ void Display_Board_end(Player &Player1, Player &Player2, Player &Player3, Dealer
     system("clear");
     cout << std::setw(25) << std::right << "Here is the Board\n\n";
     cout << std::setw(20) << std::right << "Dealer has:\n";
-    cout <<  dealer.returncards() << std::endl << "with a total of: " << dealer.returntotal() << std::endl << std::endl;
+    cout << dealer.returncards() << std::endl << "with a total of: " << dealer.returntotal() << std::endl << std::endl;
     
     cout << std::setw(15) << Player1.nameout() << " has: \n";
-    cout <<Player1.returncards() << std::endl << "With a total of: " << Player1.returnTotal() << std::endl << std::endl;
+    cout << Player1.returncards() << std::endl << "With a total of: " << Player1.returnTotal() << std::endl << std::endl;
     if (*havep2 == true)
     {
         cout << std::setw(15) << Player2.nameout() << " has: \n";
-        cout <<Player2.returncards() << std::endl << "With a total of: " << Player2.returnTotal() << std::endl << std::endl;
+        cout << Player2.returncards() << std::endl << "With a total of: " << Player2.returnTotal() << std::endl << std::endl;
     }
     if (*havep3 == true)
     {
         cout << std::setw(15) << Player3.nameout() << " has: \n";
-        cout <<Player3.returncards() << std::endl << "With a total of: " << Player3.returnTotal() << std::endl << std::endl;
+        cout << Player3.returncards() << std::endl << "With a total of: " << Player3.returnTotal() << std::endl << std::endl;
     }
 
 }
