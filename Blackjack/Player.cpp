@@ -25,11 +25,11 @@ Player::Player(std::string playername)
 {
     total = 0;
     name = playername;
-    card1 = "0";
-    card2 = "0";
-    card3 = "0";
-    card4 = "0";
-    card5 = "0";
+    card1 = "\0";
+    card2 = "\0";
+    card3 = "\0";
+    card4 = "\0";
+    card5 = "\0";
     hasAce = false;
 }
 
@@ -48,15 +48,15 @@ Player::~Player()
 
 void Player::hit(string card)
 {
-    if (card1 == "0")
+    if (card1 == "\0")
         card1 = card;
-    else if (card2 == "0")
+    else if (card2 == "\0")
         card2 = card;
-    else if (card3 == "0")
+    else if (card3 == "\0")
         card3 = card;
-    else if (card4 == "0")
+    else if (card4 == "\0")
         card4 = card;
-    else if (card5 == "0")
+    else if (card5 == "\0")
         card5 = card;
 }
 std::string Player::nameout() const
@@ -150,9 +150,20 @@ string Player::Card5() const
     return card5;
     
 }
-
-
 void Player::setname(string lable)
 {
     name = lable;
 }
+void Player::reset()
+{
+	card1 = "\0";
+	card2 = "\0";
+	card3 = "\0";
+	card4 = "\0";
+	card5 = "\0";
+	total = 0;
+	hasAce = false;
+}
+
+
+

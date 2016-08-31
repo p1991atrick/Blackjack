@@ -13,11 +13,11 @@
 Dealer::Dealer()
 {
     total = 0;
-    card1 = "0";
-    card2 = "0";
-    card3 = "0";
-    card4 = "0";
-    card5 = "0";
+    card1 = "\0";
+    card2 = "\0";
+    card3 = "\0";
+    card4 = "\0";
+    card5 = "\0";
     hasAce = false;
 }
 
@@ -45,15 +45,15 @@ int Dealer::givevalue()
 
 void Dealer::hit(string card)
 {
-    if (card1 == "0")
+    if (card1 == "\0")
         card1 = card;
-    else if (card2 == "0")
+    else if (card2 == "\0")
         card2 = card;
-    else if (card3 == "0")
+    else if (card3 == "\0")
         card3 = card;
-    else if (card4 == "0")
+    else if (card4 == "\0")
         card4 = card;
-    else if (card5 == "0")
+    else if (card5 == "\0")
         card5 = card;
 }
 
@@ -142,3 +142,14 @@ string Dealer::Card5() const
     return card5;
     
 }
+void Dealer::reset()
+{
+	card1 = "\0";
+	card2 = "\0";
+	card3 = "\0";
+	card4 = "\0";
+	card5 = "\0";
+	total = 0;
+	hasAce = false;
+}
+

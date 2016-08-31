@@ -15,7 +15,8 @@ using std::string;
 class Dealer
 {
     Deck blackjackDeck[6];
-    unsigned int total;
+	unsigned int total;
+	vector
     string card1;
     string card2;
     string card3;
@@ -41,6 +42,7 @@ public:
     int cardtotal(int);
     std::string returncards();
     std::string returncard1();
+	void reset();
 };
 
 #endif /* Dealer_h */

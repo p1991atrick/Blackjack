@@ -11,7 +11,6 @@
 
 
 #include <ostream>
-#include <vector>
 #include <ctime>
 #include <cstdlib>
 using std::string;
@@ -19,7 +18,7 @@ using std::string;
 class Deck
 {
     //variables
-    int shuffleyet;
+    unsigned int shuffleyet;
     int ii;
     int* i; //suite
     int jj;

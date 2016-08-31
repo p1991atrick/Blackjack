@@ -14,7 +14,7 @@ using std::string;
 
 class Player
 {   //ints to hold the count 
-    int total;
+    unsigned int total;
     string name;
     string card1;
     string card2;
@@ -40,6 +40,7 @@ public:
     std::string returncards();
     void setname(string);
     int returnTotal();
+	void reset();
 };
 
 #endif /* BlackJackDealer_hpp */
