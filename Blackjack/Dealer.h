@@ -16,7 +16,6 @@ class Dealer
 {
     Deck blackjackDeck[6];
 	unsigned int total;
-	vector
     string card1;
     string card2;
     string card3;
