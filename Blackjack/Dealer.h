@@ -10,26 +10,18 @@
 #define Dealer_h
 
 #include "Deck.h"
-using std::string;
+#include <vector>
 
+using std::string;
+using std::vector;
 class Dealer
 {
     Deck blackjackDeck[6];
 	unsigned int total;
-    string card1;
-    string card2;
-    string card3;
-    string card4;
-    string card5;
+	vector<string> cards;
     bool hasAce;
 	int decknumber;
-    //private functions
-    std::string Card1() const;
-    std::string Card2() const;
-    std::string Card3() const;
-    std::string Card4() const;
-    std::string Card5() const;
-    
+
 public:
     Dealer();
     ~Dealer();

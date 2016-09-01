@@ -26,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CDC9C6DC1D78B2620052A835 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		F81277AA1BFBDCC90052A835 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		F81277AB1BFBDCC90052A835 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		F8547A2F1BFBAD4B0052A835 /* Blackjack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Blackjack; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				F8547A321BFBAD4B0052A835 /* main.cpp */,
+				CDC9C6DC1D78B2620052A835 /* main.h */,
 				F8D94AA01C10D8F50052A835 /* Dealer.cpp */,
 				F8D94AA11C10D8F50052A835 /* Dealer.h */,
 				F81277AA1BFBDCC90052A835 /* Player.cpp */,

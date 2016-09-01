@@ -13,11 +13,6 @@
 Dealer::Dealer()
 {
     total = 0;
-    card1 = "\0";
-    card2 = "\0";
-    card3 = "\0";
-    card4 = "\0";
-    card5 = "\0";
     hasAce = false;
 }
 
@@ -45,16 +40,7 @@ int Dealer::givevalue()
 
 void Dealer::hit(string card)
 {
-    if (card1 == "\0")
-        card1 = card;
-    else if (card2 == "\0")
-        card2 = card;
-    else if (card3 == "\0")
-        card3 = card;
-    else if (card4 == "\0")
-        card4 = card;
-    else if (card5 == "\0")
-        card5 = card;
+	cards.push_back(card);
 }
 
 void Dealer::calctotal(int x)
@@ -84,31 +70,19 @@ int Dealer::returntotal() const
 
 std::string Dealer::returncard1()
 {
-   return Card1();
+   return cards[0];
 }
 
 std::string Dealer::returncards()
 {
     std::string tempstring;
-    tempstring += Card1();
-    tempstring += ", ";
-    tempstring += Card2();
-    if(card3 != "0")
-    {
-        tempstring += ", ";
-        tempstring += Card3();
-    }
-    if (card4 != "0")
-    {
-        tempstring += ", ";
-        tempstring += Card4();
-    }
-    if (card5 != "0")
-    {
-        tempstring += ", ";
-        tempstring += Card5();
-    }
-    return tempstring;
+	for (int i=0;i<=cards.size()-1;i++)
+	{
+		tempstring += cards[i];
+		if (i<cards.size()-1)
+			tempstring += ", ";
+	}
+	return tempstring;
 }
 
 int Dealer::cardtotal(int x)
@@ -116,39 +90,9 @@ int Dealer::cardtotal(int x)
     return total;
 }
 
-string Dealer::Card1() const
-{
-    return card1;
-    
-}
-string Dealer::Card2() const
-{
-    return card2;
-    
-}
-
-string Dealer::Card3() const
-{
-    return card3;
-    
-}
-string Dealer::Card4() const
-{
-    return card4;
-    
-}
-string Dealer::Card5() const
-{
-    return card5;
-    
-}
 void Dealer::reset()
 {
-	card1 = "\0";
-	card2 = "\0";
-	card3 = "\0";
-	card4 = "\0";
-	card5 = "\0";
+	cards.resize(0);
 	total = 0;
 	hasAce = false;
 }

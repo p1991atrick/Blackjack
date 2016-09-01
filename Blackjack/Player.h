@@ -10,24 +10,20 @@
 #define BlackJackDealer_h
 
 #include <ostream>
+#include <vector>
+#include <cstdlib>
+
+using std::vector;
 using std::string;
 
 class Player
 {   //ints to hold the count 
     unsigned int total;
     string name;
-    string card1;
-    string card2;
-    string card3;
-    string card4;
-    string card5;
+	vector<string> cards;
     bool hasAce;
     //private functions
-    std::string Card1() const;
-    std::string Card2() const;
-    std::string Card3() const;
-    std::string Card4() const;
-    std::string Card5() const;
+
 public:
     Player();
     Player(string);

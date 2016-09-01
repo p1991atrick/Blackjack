@@ -5,47 +5,27 @@
 //  Created by Gordon Freeman on 11/17/15.
 //  Copyright © 2015 Patrick Kelly. All rights reserved.
 //
-
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include "Player.h"
-#include "Dealer.h"
-using std::cout;
-
-//function prototypes
-void Help();
-string CLI_Args(int argc, char * argv[]);
-void Game_setup(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3);
-void Display_Board(Player *Player1, Player *Player2, Player *Player3, Dealer *dealer, bool *havep2, bool *havep3);
-void Display_Board_end(Player *Player1, Player *Player2, Player *Player3, Dealer *dealer, bool *havep2, bool *havep3);
-void Playerturn(Player *Player1, Dealer *dealer, string *hitstay);
-void Game_play(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3);
-void dealerturn(Dealer *dealer,string *hitstay);
-void Winners(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3);
-void Reset_Board(bool *havep2, bool *havep3, Player *Player1, Player *Player2, Player *Player3, Dealer *dealer);
+#include "main.h"
 
 int main(int argc, char * argv[])
 {
 	std::string savefile = CLI_Args(argc, argv);
     //Dealer and vars
     Dealer dealer;
-    Player Player1;
-    Player Player2;
-    Player Player3;
-    bool havep2 = false;
-    bool havep3 = false;
+    vector<Player> Players;
+	int numofgames = 1;
+
     
     //the game
 	char continueplay = 'n';
 	do{
-		Game_setup(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3);
-		Game_play(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3);
-		Display_Board_end(&Player1, &Player2, &Player3, &dealer, &havep2, &havep3);
-		Winners(&dealer, &Player1, &Player2, &Player3, &havep2, &havep3);
+		Game_setup(&dealer, &Players, &numofgames);
+		Game_play(&dealer, Players);
+		Display_Board_end(&dealer, &Players);
+		Winners(&dealer, &Players);
 		cout << "Would you like to play again (y or n):  ";
 		std::cin >> continueplay;
-		Reset_Board(&havep2, &havep3, &Player1, &Player2, &Player3, &dealer);
+		Reset_Board(&Players, &dealer);
 	}while(continueplay == 'y');
 
     return 0;
@@ -88,80 +68,62 @@ void Help()
     exit(5);
 }
 
-void Game_setup(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3)
+void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 {
-    
-    int numofplayers;
-    string PLAYERS[3];
-    do{
-    cout << "How many Players? (1-3)\n";
-    std::cin >> numofplayers;
-    }while (numofplayers < 1 || numofplayers > 3);
-    
-    //build players
-    for(int i = 0; i< numofplayers; i++)
-    {
-        cout << "Enter name of player " << i+1 << ": ";
-        std::cin >> PLAYERS[i];
-        if (i==1)
-            *havep2 = true;
-        if (i==2)
-            *havep3 = true;
-    }
-    Player1->setname(PLAYERS[0]);
-    if(*havep2 == true)
-        Player2->setname(PLAYERS[1]);
-    if(*havep3 == true)
-        Player3->setname(PLAYERS[2]);
-    
+    if (*numofgames == 1)
+	{
+		int numofplayers;
+		do{
+		cout << "How many Players are there? (1-5)\n";
+		std::cin >> numofplayers;
+		}while (numofplayers < 1 || numofplayers > 5);
+
+		Players->resize(numofplayers);
+		
+		//build players
+		for(int i = 0; i< numofplayers; i++)
+		{
+			string name;
+			cout << "Enter name of player " << i+1 << ": ";
+			cin >> name;
+			Players->at(i).setname(name);
+		}
+	}
     //start game deal
     int x=0;
     cout << "Dealing....."<< std::endl;
     do{
         dealer->hit(dealer->givecard());
         dealer->calctotal(dealer->givevalue());
-        Player1->hit(dealer->givecard());
-        Player1->calctotal(dealer->givevalue());
-        if(*havep2 == true)
-        {
-            Player2->hit(dealer->givecard());
-            Player2->calctotal(dealer->givevalue());
-        }
-        if(*havep3 == true)
-        {
-            Player3->hit(dealer->givecard());
-            Player3->calctotal(dealer->givevalue());
-        }
-        x++;
+		for (int i=0;i<Players->size();i++)
+		{
+			Players->at(i).hit(dealer->givecard());
+			Players->at(i).calctotal(dealer->givevalue());
+		}
+		x++;
     }while(x<2);
 }
 
-void Game_play(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3)
+void Game_play(Dealer *dealer, vector<Player> &Players)
 {
     string hitstay = "stay";
-    Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-    Playerturn(Player1, dealer, &hitstay);
-    if(*havep2 == true)
-    {
-        Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-        Playerturn(Player2, dealer, &hitstay);
-    }
-    if(*havep3 == true)
-    {
-        Display_Board(Player1, Player2, Player3, dealer, havep2, havep3);
-        Playerturn(Player3, dealer, &hitstay);
-    }
-    dealerturn(dealer, &hitstay);
+	for (int i=0;i<Players.size();i++)
+	{
+		Display_Board(dealer);
+		Player *currentplayer = &Players[i]; //pointer to current vector record
+		Playerturn(currentplayer, dealer, &hitstay);
+	}
+	dealerturn(dealer, &hitstay);
 }
 
-void Playerturn(Player *Playertemp, Dealer *dealer, string *hitstay)
+void Playerturn(Player *currentplayer, Dealer *dealer, string *hitstay)
 {
-    cout << Playertemp->nameout() << "'s  turn:\n";
+    cout << currentplayer->nameout() << "'s  turn:\n";
     system( "read -n 1 -s -p \"Press any key to return to continue...\"\n" );
     cout << "\nHere are your Cards,\n";
-    cout << Playertemp->returncards() << std::endl;
-    cout <<"for a total of: " << Playertemp->returnTotal() << std::endl << std::endl;
-    if(Playertemp->returnTotal() == 21)
+    cout << currentplayer->returncards() << std::endl;
+    cout <<"for a total of: " << currentplayer->returnTotal() << std::endl << std::endl;
+    if(currentplayer->returnTotal() == 21)
     {
         cout << "You have Blackjack and win!\n";
     }
@@ -172,16 +134,16 @@ void Playerturn(Player *Playertemp, Dealer *dealer, string *hitstay)
             std::cin >> *hitstay;
             if(*hitstay == "Hit" || *hitstay == "hit" || *hitstay == "H" || *hitstay == "h")
             {
-                Playertemp->hit(dealer->givecard());
-                Playertemp->calctotal(dealer->givevalue());
+                currentplayer->hit(dealer->givecard());
+                currentplayer->calctotal(dealer->givevalue());
                 cout << "Your new cards are: \n";
-                cout <<  Playertemp->returncards() << "\nAnd the total is: " << Playertemp->returnTotal() << std::endl << std::endl;
-                if(Playertemp->returnTotal() > 21)
+                cout <<  currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << std::endl << std::endl;
+                if(currentplayer->returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
                     *hitstay = "stay";
                 }
-                if (Playertemp->returnTotal() ==21)
+                if (currentplayer->returnTotal() ==21)
                 {
                     cout << "Blackjack!! You win\n";
                     *hitstay = "stay";
@@ -207,7 +169,7 @@ void dealerturn(Dealer *dealer,string *hitstay)
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     if (dealer->returntotal() == 21)
     {
-        cout << "Dealer has Blackjack!\n\n";
+        cout << "\n\nDealer has Blackjack!\n\n";
         system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     }
     else if (dealer->returntotal() < 16)
@@ -231,7 +193,7 @@ void dealerturn(Dealer *dealer,string *hitstay)
     }
 }
 
-void Display_Board(Player *Player1, Player *Player2, Player *Player3, Dealer *dealer, bool *havep2, bool *havep3)
+void Display_Board(Dealer *dealer)
 {
     system("clear");
     cout << std::setw(25) << std::right << "Here is the Board\n\n";
@@ -240,106 +202,68 @@ void Display_Board(Player *Player1, Player *Player2, Player *Player3, Dealer *de
     
 }
 
-void Display_Board_end(Player *Player1, Player *Player2, Player *Player3, Dealer *dealer, bool *havep2, bool *havep3)
+void Display_Board_end(Dealer *dealer, vector<Player> *Players)
 {
     system("clear");
     cout << std::setw(25) << std::right << "Here is the Board\n\n";
     cout << std::setw(20) << std::right << "Dealer has:\n";
     cout << dealer->returncards() << std::endl << "with a total of: " << dealer->returntotal() << std::endl << std::endl;
-    
-    cout << std::setw(15) << Player1->nameout() << " has: \n";
-    cout << Player1->returncards() << std::endl << "With a total of: " << Player1->returnTotal() << std::endl << std::endl;
-    if (*havep2 == true)
-    {
-        cout << std::setw(15) << Player2->nameout() << " has: \n";
-        cout << Player2->returncards() << std::endl << "With a total of: " << Player2->returnTotal() << std::endl << std::endl;
-    }
-    if (*havep3 == true)
-    {
-        cout << std::setw(15) << Player3->nameout() << " has: \n";
-        cout << Player3->returncards() << std::endl << "With a total of: " << Player3->returnTotal() << std::endl << std::endl;
-    }
-
+	int i=0;
+	for (;i<Players->size();i++)
+	{
+		cout << std::setw(15) << Players->at(i).nameout() << " has: \n";
+		cout << Players->at(i).returncards() << endl << "With a total of: " << Players->at(i).returnTotal() << endl << endl;
+	}
 }
 
-void Winners(Dealer *dealer, Player *Player1, Player *Player2, Player *Player3, bool *havep2, bool *havep3)
+void Winners(Dealer *dealer, vector<Player> *Players)
 {
-    bool p1 = false, p2 = false, p3 = false;
-    //dealer has < 21
+	//dealer has < 21
     if(dealer->returntotal() <21)
     {
-        if (Player1->returnTotal() > dealer->returntotal() && Player1->returnTotal() <= 21)
-        {
-            cout << Player1->nameout() << " Wins\n";
-            p1=true;
-        }
-        if (Player2->returnTotal() > dealer->returntotal() && Player2->returnTotal() <= 21 && *havep2 == true)
-        {
-            cout << Player2->nameout() << " Wins\n";
-            p2=true;
-        }
-        if (Player3->returnTotal() > dealer->returntotal() && Player3->returnTotal() <= 21 && *havep3 == true)
-        {
-            cout << Player3->nameout() << " Wins\n";
-            p3=true;
-        }
-        if(p1 == false && p2 == false && p3 == false)
-        {
-            if (Player1->returnTotal() == dealer->returntotal() || Player2->returnTotal() == dealer->returntotal() || Player3->returnTotal() == dealer->returntotal())
-            {
-                cout << "Draw.\n";
-            }
-            else
-                cout << "Dealer Wins\n";
-        }
+		for (int i=0;i<Players->size();i++)
+		{
+			if (Players->at(i).returnTotal() > dealer->returntotal() && Players->at(i).returnTotal() <= 21)
+			{
+				cout << Players->at(i).nameout() << " Wins!\n";
+			}
+
+			else if (Players->at(i).returnTotal() == dealer->returntotal())
+			{
+				cout << Players->at(i).nameout() << " Tied with the dealer.\n";
+			}
+			else
+				cout << Players->at(i).nameout() << " Lost to the dealer.\n";
+		}
     }
     //dealer bust
     else if(dealer->returntotal() > 21)
     {
-        if (Player1->returnTotal() <= 21)
-        {
-            cout << Player1->nameout() << " Wins\n";
-        }
-        if (Player2->returnTotal() <= 21 && *havep2 == true)
-        {
-            cout << Player2->nameout() << " Wins\n";
-        }
-        if (Player3->returnTotal() <= 21 && *havep3 == true)
-        {
-            cout << Player3->nameout() << " Wins\n";
-        }
-    }
+		for (int i=0;i<Players->size();i++)
+		{
+			if (Players->at(i).returnTotal() <= 21)
+				cout << Players->at(i).nameout() << " Wins!\n";
+		}
+	}
     //dealer has 21
     else if(dealer->returntotal() == 21)
     {
         cout << "Dealer Wins\n";
-        if (Player1->returnTotal() == 21)
-        {
-            cout << Player1->nameout() << " Wins\n";
-        }
-        if (Player2->returnTotal() == 21 && *havep2 == true)
-        {
-            cout << Player2->nameout() << " Wins\n";
-        }
-        if (Player3->returnTotal() == 21 && *havep3 == true)
-        {
-            cout << Player3->nameout() << " Wins\n";
-        }
-    }
+		for (int i=0;i<Players->size();i++)
+		{
+			if (Players->at(i).returnTotal() == 21)
+				cout << Players->at(i).nameout() << " Wins!\n";
+		}
+	}
 }
 
-void Reset_Board(bool *havep2, bool *havep3, Player *Player1, Player *Player2, Player *Player3, Dealer *dealer)
+void Reset_Board(vector<Player> *Players, Dealer *dealer)
 {
-	Player1->reset();
+	for (int i=0;i<Players->size();i++)
+	{
+		Players->at(i).reset();
+	}
 	dealer->reset();
-	if (*havep2 == true)
-	{
-		Player2->reset();
-	}
-	if (*havep3 == true)
-	{
-		Player3->reset();
-	}
 }
 
 
