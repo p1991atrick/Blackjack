@@ -25,6 +25,7 @@ int main(int argc, char * argv[])
 		Winners(&dealer, &Players);
 		cout << "Would you like to play again (y or n):  ";
 		std::cin >> continueplay;
+		numofgames++;
 		Reset_Board(&Players, &dealer);
 	}while(continueplay == 'y');
 
