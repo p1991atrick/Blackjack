@@ -10,19 +10,21 @@
 int main(int argc, char * argv[])
 {
 	std::string savefile = CLI_Args(argc, argv);
-    //Dealer and vars
+	fstream outputfile;
+	outputfile.open(savefile, ios::out | ios::app);
+	//Dealer and vars
     Dealer dealer;
     vector<Player> Players;
 	int numofgames = 1;
-
     
     //the game
 	char continueplay = 'n';
 	do{
 		Game_setup(&dealer, &Players, &numofgames);
-		Game_play(&dealer, Players);
+		Game_play(&dealer, &Players);
 		Display_Board_end(&dealer, &Players);
 		Winners(&dealer, &Players);
+		Write_to_file(&outputfile, &dealer, &Players, &numofgames);
 		cout << "Would you like to play again (y or n):  ";
 		std::cin >> continueplay;
 		numofgames++;
@@ -75,7 +77,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 	{
 		int numofplayers;
 		do{
-		cout << "How many Players are there? (1-5)\n";
+		cout << "How many Players are there? (1-5): ";
 		std::cin >> numofplayers;
 		}while (numofplayers < 1 || numofplayers > 5);
 
@@ -105,25 +107,24 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
     }while(x<2);
 }
 
-void Game_play(Dealer *dealer, vector<Player> &Players)
+void Game_play(Dealer *dealer, vector<Player> *Players)
 {
-    string hitstay = "stay";
-	for (int i=0;i<Players.size();i++)
+	for (int i=0;i<Players->size();i++)
 	{
 		Display_Board(dealer);
-		Player *currentplayer = &Players[i]; //pointer to current vector record
-		Playerturn(currentplayer, dealer, &hitstay);
+		Playerturn(&Players->at(i), dealer);
 	}
-	dealerturn(dealer, &hitstay);
+	dealerturn(dealer);
 }
 
-void Playerturn(Player *currentplayer, Dealer *dealer, string *hitstay)
+void Playerturn(Player *currentplayer, Dealer *dealer)
 {
+	string hitstay = "stay";
     cout << currentplayer->nameout() << "'s  turn:\n";
-    system( "read -n 1 -s -p \"Press any key to return to continue...\"\n" );
+    system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     cout << "\nHere are your Cards,\n";
-    cout << currentplayer->returncards() << std::endl;
-    cout <<"for a total of: " << currentplayer->returnTotal() << std::endl << std::endl;
+    cout << setw(20) << right << currentplayer->returncards() << endl;
+    cout <<"for a total of: " << currentplayer->returnTotal() << endl << endl;
     if(currentplayer->returnTotal() == 21)
     {
         cout << "You have Blackjack and win!\n";
@@ -131,32 +132,32 @@ void Playerturn(Player *currentplayer, Dealer *dealer, string *hitstay)
     else
     {
         do{
-            cout << "Would you like to hit or Stay? \n";
-            std::cin >> *hitstay;
-            if(*hitstay == "Hit" || *hitstay == "hit" || *hitstay == "H" || *hitstay == "h")
+            cout << "Would you like to hit or Stay?: ";
+            std::cin >> hitstay;
+            if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
             {
                 currentplayer->hit(dealer->givecard());
                 currentplayer->calctotal(dealer->givevalue());
                 cout << "Your new cards are: \n";
-                cout <<  currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << std::endl << std::endl;
+                cout << setw(5) << right << currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << std::endl << std::endl;
                 if(currentplayer->returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
-                    *hitstay = "stay";
+                    hitstay = "stay";
                 }
                 if (currentplayer->returnTotal() ==21)
                 {
                     cout << "Blackjack!! You win\n";
-                    *hitstay = "stay";
+                    hitstay = "stay";
                 }
             }
-        }while (*hitstay == "Hit" || *hitstay == "hit" || *hitstay == "H" || *hitstay == "h");
+        }while (hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h");
         
     }
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
 }
 
-void dealerturn(Dealer *dealer,string *hitstay)
+void dealerturn(Dealer *dealer)
 {
     system("clear");
     cout << "\nThe Dealer will now play...\n\n";
@@ -256,6 +257,19 @@ void Winners(Dealer *dealer, vector<Player> *Players)
 				cout << Players->at(i).nameout() << " Wins!\n";
 		}
 	}
+}
+void Write_to_file(fstream *fout, Dealer *dealer, vector<Player> * Players, int *numofgames)
+{
+	*fout << setw(20) << std::right << "Game Number " << *numofgames << endl << endl;
+	*fout << setw(10) << right << "Dealer's total was: " << dealer->returntotal() << endl;
+	*fout << setw(10) << right << "Dealer's cards: " << dealer->returncards() << endl;
+	for (int i=0;i<Players->size();i++)
+	{
+		*fout << setw(10) << right << "Player " << i+1 << " (" << Players->at(i).nameout() << ") had: " << Players->at(i).returnTotal() << endl;
+		*fout << setw(10) << right << Players->at(i).nameout() << "'s cards are: " << Players->at(i).returncards() << endl;
+	}
+	*fout << endl;
+
 }
 
 void Reset_Board(vector<Player> *Players, Dealer *dealer)
