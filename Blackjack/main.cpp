@@ -9,8 +9,9 @@
 
 int main(int argc, char * argv[])
 {
-	std::string savefile = CLI_Args(argc, argv);
+	string savefile = CLI_Args(argc, argv);
 	fstream outputfile;
+	savefile = FileIO(savefile);
 	outputfile.open(savefile, ios::out | ios::app);
 	//Dealer and vars
     Dealer dealer;
@@ -26,14 +27,30 @@ int main(int argc, char * argv[])
 		Winners(&dealer, &Players);
 		Write_to_file(&outputfile, &dealer, &Players, &numofgames);
 		cout << "Would you like to play again (y or n):  ";
-		std::cin >> continueplay;
+		cin >> continueplay;
 		numofgames++;
 		Reset_Board(&Players, &dealer);
 	}while(continueplay == 'y');
-
+	outputfile.close(); /* <-- very importaint !! */
     return 0;
 }
 
+string FileIO(string savefile)	//deternins if the filename needs txt extention or not. if it does it adds it.
+{
+	char *savecstring = new char [savefile.length()+1];
+	std::strcpy(savecstring, savefile.c_str());
+	if (std::strstr(savecstring, ".txt")==0)
+	{
+		delete[] savecstring;
+		char *savecstring2 = new char [savefile.length()+5];
+		std::strcpy(savecstring2, savefile.c_str());
+		std::strncat(savecstring2, ".txt", 4);
+		string tempsave(savecstring2);
+		delete[] savecstring2;
+		return tempsave;
+	}
+	return savefile;
+}
 
 string CLI_Args(int argc, char * argv[])
 {
@@ -64,10 +81,10 @@ string CLI_Args(int argc, char * argv[])
 
 void Help()
 {
-    cout << std::setw(20) << std::right << "Help Menu\n";
-    cout << std::setw(15) << std::left << "-?" << "| " << "Shows this help menu\n";
-    cout << std::setw(17) << std::right << "|\n";
-    cout << std::setw(15) << std::left << "--Output-file" << "| " << "name of file for saving game\n\n";
+    cout << setw(20) << right << "Help Menu\n";
+    cout << setw(15) << left << "-?" << "| " << "Shows this help menu\n";
+    cout << setw(17) << right << "|\n";
+    cout << setw(15) << left << "--Output-file" << "| " << "name of file for saving game\n\n";
     exit(5);
 }
 
@@ -78,8 +95,8 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 		int numofplayers;
 		do{
 		cout << "How many Players are there? (1-5): ";
-		std::cin >> numofplayers;
-		}while (numofplayers < 1 || numofplayers > 5);
+		cin >> numofplayers;
+		}while (numofplayers < 1);
 
 		Players->resize(numofplayers);
 		
@@ -94,7 +111,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 	}
     //start game deal
     int x=0;
-    cout << "Dealing....."<< std::endl;
+    cout << "Dealing....."<< endl;
     do{
         dealer->hit(dealer->givecard());
         dealer->calctotal(dealer->givevalue());
@@ -120,10 +137,10 @@ void Game_play(Dealer *dealer, vector<Player> *Players)
 void Playerturn(Player *currentplayer, Dealer *dealer)
 {
 	string hitstay = "stay";
-    cout << currentplayer->nameout() << "'s  turn:\n";
+    cout << currentplayer->nameout() << "'s  turn...\n";
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
-    cout << "\nHere are your Cards,\n";
-    cout << setw(20) << right << currentplayer->returncards() << endl;
+    cout << "\nHere are your Cards:\n";
+    cout << setw(sizeof(currentplayer->returncards())+5) << right << currentplayer->returncards() << endl;
     cout <<"for a total of: " << currentplayer->returnTotal() << endl << endl;
     if(currentplayer->returnTotal() == 21)
     {
@@ -133,13 +150,13 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
     {
         do{
             cout << "Would you like to hit or Stay?: ";
-            std::cin >> hitstay;
+            cin >> hitstay;
             if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
             {
                 currentplayer->hit(dealer->givecard());
                 currentplayer->calctotal(dealer->givevalue());
-                cout << "Your new cards are: \n";
-                cout << setw(5) << right << currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << std::endl << std::endl;
+                cout << "\nYour new cards are: \n";
+                cout << setw(sizeof(currentplayer->returncards())+5) << right << currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << endl << endl;
                 if(currentplayer->returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
@@ -162,8 +179,8 @@ void dealerturn(Dealer *dealer)
     system("clear");
     cout << "\nThe Dealer will now play...\n\n";
     cout << "here are the Dealer's cards:\n";
-    cout << dealer->returncards() << std::endl;
-    cout << "for a total of: " <<  dealer->returntotal() << std::endl << std::endl;
+    cout << dealer->returncards() << endl;
+    cout << "for a total of: " <<  dealer->returntotal() << endl << endl;
 	if (dealer->returntotal() < 16)
 	{
 		cout << "\nDealer doesn't have 16 and must take another card:\n";
@@ -180,8 +197,8 @@ void dealerturn(Dealer *dealer)
             dealer->hit(dealer->givecard());
             dealer->calctotal(dealer->givevalue());
             cout << "The dealers new cards are:\n";
-            cout << dealer->returncards() << std::endl;
-            cout << "and the total is: " << dealer->returntotal() << std::endl << std::endl;
+            cout << dealer->returncards() << endl;
+            cout << "and the total is: " << dealer->returntotal() << endl << endl;
             if(dealer->returntotal() > 21)
             {
                 cout << "Dealer busts!\n";
@@ -198,22 +215,22 @@ void dealerturn(Dealer *dealer)
 void Display_Board(Dealer *dealer)
 {
     system("clear");
-    cout << std::setw(25) << std::right << "Here is the Board\n\n";
-    cout << std::setw(20) << std::right << "Dealer has\n";
-    cout << std::setw(20) << std::right <<  dealer->returncard1() << std::endl << std::endl;
+    cout << setw(25) << right << "Here is the Board\n\n";
+    cout << setw(20) << right << "Dealer has\n";
+    cout << setw(20) << right <<  dealer->returncard1() << endl << endl;
     
 }
 
 void Display_Board_end(Dealer *dealer, vector<Player> *Players)
 {
     system("clear");
-    cout << std::setw(25) << std::right << "Here is the Board\n\n";
-    cout << std::setw(20) << std::right << "Dealer has:\n";
-    cout << dealer->returncards() << std::endl << "with a total of: " << dealer->returntotal() << std::endl << std::endl;
+    cout << setw(25) << right << "Here is the Board\n\n";
+    cout << setw(sizeof("Dealer")+15) << right << "Dealer has:\n";
+    cout << dealer->returncards() << endl << "\nwith a total of: " << dealer->returntotal() << endl << endl;
 	int i=0;
 	for (;i<Players->size();i++)
 	{
-		cout << std::setw(15) << Players->at(i).nameout() << " has: \n";
+		cout << setw(20) << right<< Players->at(i).nameout() << " has: \n";
 		cout << Players->at(i).returncards() << endl << "With a total of: " << Players->at(i).returnTotal() << endl << endl;
 	}
 }
@@ -260,7 +277,7 @@ void Winners(Dealer *dealer, vector<Player> *Players)
 }
 void Write_to_file(fstream *fout, Dealer *dealer, vector<Player> * Players, int *numofgames)
 {
-	*fout << setw(20) << std::right << "Game Number " << *numofgames << endl << endl;
+	*fout << setw(20) << right << "Game Number " << *numofgames << endl << endl;
 	*fout << setw(10) << right << "Dealer's total was: " << dealer->returntotal() << endl;
 	*fout << setw(10) << right << "Dealer's cards: " << dealer->returncards() << endl;
 	for (int i=0;i<Players->size();i++)

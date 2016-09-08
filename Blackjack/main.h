@@ -17,6 +17,7 @@
 #include <fstream>
 #include "Player.h"
 #include "Dealer.h"
+#include <cstring>
 
 using std::cout;
 using std::vector;
@@ -30,6 +31,7 @@ using std::left;
 
 
 //function prototypes
+string FileIO(string savefile);
 void Help();
 string CLI_Args(int argc, char * argv[]);
 void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames);
