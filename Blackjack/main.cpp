@@ -109,7 +109,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 		//build players
 		for(int i = 0; i< numofplayers; i++)
 		{
-			char *name = new char[16];
+			char *name = new char;
 			cout << "Enter name of player " << i+1 << ": ";
 			cin >> name;
 			Players->at(i).setname(name);

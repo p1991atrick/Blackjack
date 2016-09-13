@@ -64,7 +64,7 @@ char * Deck::getCard()
     CardUsed();
     shuffleyet++;
     //print what it is
-	char *tempstring = new char[18];
+	char *tempstring = new char;
     {//find value
         if(*j == 0)
             strncpy(tempstring, "2", 1);

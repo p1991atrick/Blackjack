@@ -76,9 +76,9 @@ char * Player::returncards()
 	char *tempcstring = new char;
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		strncat(tempcstring, cards[i].c_str(), sizeof(cards[i]));
+		strcat(tempcstring, cards[i].c_str());
 		if (i<cards.size()-1)
-			strncat(tempcstring, ", ", 2);
+			strcat(tempcstring, ", ");
 	}
 	return tempcstring;
 }
@@ -90,7 +90,7 @@ int Player::CardTotal(int x)
 
 void Player::setname(char * lable)
 {
-	strncpy(name, lable, strnlen(lable, 15));
+	strcpy(name, lable);
 }
 void Player::reset()
 {
