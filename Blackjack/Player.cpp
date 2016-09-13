@@ -11,30 +11,31 @@
 Player::Player()
 {
     total = 0;
-    name = "empty";
+	strncpy(name, "empty", 5);
     hasAce = false;
+
 }
 
-Player::Player(std::string playername)
+Player::Player(char *playername)
 {
     total = 0;
-    name = playername;
+    strncpy(name, playername, strlen(playername));
     hasAce = false;
 }
 
 Player::~Player()
 {
-//    delete[] &total;
-//    delete[] &name;
-//    delete[] &hasAce;
+    delete name;
 }
 
 
-void Player::hit(string card)
+void Player::hit(char *card)
 {
+	//string tempcard(card);
 	cards.push_back(card);
 }
-std::string Player::nameout() const
+
+char * Player::nameout() const
 {
     return name;
 }
@@ -70,16 +71,16 @@ int Player::returnTotal()
 {
     return total;
 }
-string Player::returncards()
+char * Player::returncards()
 {
-	std::string tempstring;
+	char *tempcstring = new char;
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		tempstring += cards[i];
+		strncat(tempcstring, cards[i].c_str(), sizeof(cards[i]));
 		if (i<cards.size()-1)
-			tempstring += ", ";
+			strncat(tempcstring, ", ", 2);
 	}
-	return tempstring;
+	return tempcstring;
 }
 
 int Player::CardTotal(int x)
@@ -87,9 +88,9 @@ int Player::CardTotal(int x)
     return total;
 }
 
-void Player::setname(string lable)
+void Player::setname(char * lable)
 {
-    name = lable;
+	strncpy(name, lable, strnlen(lable, 15));
 }
 void Player::reset()
 {

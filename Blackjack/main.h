@@ -31,9 +31,8 @@ using std::left;
 
 
 //function prototypes
-string FileIO(string savefile);
 void Help();
-string CLI_Args(int argc, char * argv[]);
+char * CLI_Args(int argc, char * argv[]);
 void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames);
 void Display_Board(Dealer *dealer);
 void Display_Board_end(Dealer *dealer, vector<Player> *Players);

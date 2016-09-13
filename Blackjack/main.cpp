@@ -9,9 +9,9 @@
 
 int main(int argc, char * argv[])
 {
-	string savefile = CLI_Args(argc, argv);
+	char * savefile = new char;
+	strncpy(savefile, CLI_Args(argc, argv), strlen(CLI_Args(argc, argv)));
 	fstream outputfile;
-	savefile = FileIO(savefile);
 	outputfile.open(savefile, ios::out | ios::app);
 	//Dealer and vars
     Dealer dealer;
@@ -30,35 +30,20 @@ int main(int argc, char * argv[])
 		cin >> continueplay;
 		numofgames++;
 		Reset_Board(&Players, &dealer);
-	}while(continueplay == 'y');
+	}while(continueplay == 'y' || continueplay == 'Y');
 	outputfile.close(); /* <-- very importaint !! */
     return 0;
 }
 
-string FileIO(string savefile)	//deternins if the filename needs txt extention or not. if it does it adds it.
-{
-	char *savecstring = new char [savefile.length()+1];
-	std::strcpy(savecstring, savefile.c_str());
-	if (std::strstr(savecstring, ".txt")==0)
-	{
-		delete[] savecstring;
-		char *savecstring2 = new char [savefile.length()+5];
-		std::strcpy(savecstring2, savefile.c_str());
-		std::strncat(savecstring2, ".txt", 4);
-		string tempsave(savecstring2);
-		delete[] savecstring2;
-		return tempsave;
-	}
-	return savefile;
-}
 
-string CLI_Args(int argc, char * argv[])
+char * CLI_Args(int argc, char * argv[])
 {
+	char returnable[31];
     if (argc > 1)
     {
         for (int i = 1; i< argc; i++)
         {
-            char * arg = argv[i];
+            char *arg = argv[i];
             if(arg[0] != '-')
                 Help();
             if (strcmp(arg, "-?")==0 || strcmp(arg, "-h")==0)
@@ -68,15 +53,36 @@ string CLI_Args(int argc, char * argv[])
             if (strcmp(arg, "--output-file")==0)
             {
                 i++;
-                return argv[i];
+				arg = argv[i];
+				if (strlen(returnable) <= 30 && strstr(returnable, ".txt")!=0)
+				{
+					strncpy(returnable, arg, strlen(arg));
+				}
+				else if (strlen(returnable) > 30 && strstr(returnable, ".txt")!=0)
+				{
+					strncpy(returnable, arg, 30);
+				}
+				else if (strlen(returnable) > 26 && strstr(returnable, ".txt")==0)
+				{
+					strncpy(returnable, arg, 26);
+					strncat(returnable, ".txt", 4);
+				}
+				else if (strlen(returnable) <= 26 && strstr(returnable, ".txt")==0)
+				{
+					strncpy(returnable, arg, strlen(arg));
+					strncat(returnable, ".txt", 4);
+				}
+
             }
         }
     }
     else
     {
         Help();
+		strncpy(returnable, "none", 4);
     }
-    return "none";
+	char *temp = returnable;
+    return temp;
 }
 
 void Help()
@@ -94,7 +100,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 	{
 		int numofplayers;
 		do{
-		cout << "How many Players are there? (1-5): ";
+		cout << "How many Players are there?: ";
 		cin >> numofplayers;
 		}while (numofplayers < 1);
 
@@ -103,7 +109,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 		//build players
 		for(int i = 0; i< numofplayers; i++)
 		{
-			string name;
+			char *name = new char[16];
 			cout << "Enter name of player " << i+1 << ": ";
 			cin >> name;
 			Players->at(i).setname(name);

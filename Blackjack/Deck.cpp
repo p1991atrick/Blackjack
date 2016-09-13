@@ -12,8 +12,6 @@
 
 Deck::Deck()
 {
-    i= &ii;
-    j= &jj;
     shuffleyet = 0;
     Deck::shuffle();
     //generate random seed
@@ -27,7 +25,7 @@ Deck::~Deck()
 
 void Deck::getValue()
 {
-    if (shuffleyet > 35)
+    if (shuffleyet > 45)
     {
         shuffle();
     }
@@ -60,58 +58,58 @@ void Deck::CardUsed()
     deckarray[*i][*j] = true;
 }
 
-std::string Deck::getCard()
+char * Deck::getCard()
 {
     //find open card
     CardUsed();
     shuffleyet++;
     //print what it is
-    std::string tempstring;
+	char *tempstring = new char[18];
     {//find value
         if(*j == 0)
-            tempstring = "2";
+            strncpy(tempstring, "2", 1);
         else if (*j == 1)
-            tempstring = "3";
+            strncpy(tempstring, "3", 1);
         else if (*j == 2)
-            tempstring = "4";
+            strncpy(tempstring, "4", 1);
         else if (*j == 3)
-            tempstring = "5";
+            strncpy(tempstring, "5", 1);
         else if (*j == 4)
-            tempstring = "6";
+            strncpy(tempstring, "6", 1);
         else if (*j == 5)
-            tempstring = "7";
+            strncpy(tempstring, "7", 1);
         else if (*j == 6)
-            tempstring = "8";
+            strncpy(tempstring, "8", 1);
         else if (*j == 7)
-            tempstring = "9";
+            strncpy(tempstring, "9", 1);
         else if (*j == 8)
-            tempstring = "10";
+            strncpy(tempstring, "10", 1);
         else if (*j == 9)
-            tempstring = "Jack";
+            strncpy(tempstring, "11", 1);
         else if (*j == 10)
-            tempstring = "Queen";
+            strncpy(tempstring, "Queen", 5);
         else if (*j == 11)
-            tempstring = "King";
+            strncpy(tempstring, "King", 4);
         else if (*j == 12)
-            tempstring = "Ace";
+            strncpy(tempstring, "Ace", 3);
     }
 
     {//find suite
         if(*i == 0)
         {
-            tempstring = tempstring + " of Clubs";
+            strncat(tempstring, " of Clubs", 9);
         }
         else if (*i == 1)
         {
-            tempstring = tempstring + " of Dimonds";
+            strncat(tempstring, " of Dimonds", 11);
         }
         else if (*i == 2)
         {
-            tempstring = tempstring + " of Hearts";
+            strncat(tempstring, " of Hearts", 10);
         }
         else if (*i == 3)
         {
-            tempstring = tempstring + " of Spades";
+            strncat(tempstring, " of Spades", 10);
         }
     }
     return tempstring;

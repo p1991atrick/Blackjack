@@ -18,19 +18,15 @@ Dealer::Dealer()
 
 Dealer::~Dealer()
 {
-//    delete[] &total;
-//    delete[] &hasAce;
-//    delete[] &card2;
-//    delete[] &card1;
-//    delete[] &card3;
-//    delete[] &card4;
-//    delete[] &card5;
+
 }
 
-std::string Dealer::givecard()
+char * Dealer::givecard()
 {
 	decknumber = rand() % 6;
-    return blackjackDeck[decknumber].getCard();
+	char *toreturn = new char;
+	strncpy(toreturn, blackjackDeck[decknumber].getCard(), strlen(blackjackDeck[decknumber].getCard()));
+    return toreturn;
 }
 
 int Dealer::givevalue()
@@ -68,21 +64,23 @@ int Dealer::returntotal() const
     return total;
 }
 
-std::string Dealer::returncard1()
+char * Dealer::returncard1()
 {
-   return cards[0];
+	char *card = new char;
+	strncpy(card, cards[0].c_str(), sizeof(cards[0]));
+	return card;
 }
 
-std::string Dealer::returncards()
+char * Dealer::returncards()
 {
-    std::string tempstring;
+    char *tempcstring = new char;
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		tempstring += cards[i];
+		strncat(tempcstring, cards[i].c_str(), sizeof(cards[i]));
 		if (i<cards.size()-1)
-			tempstring += ", ";
+			strncat(tempcstring, ", ", 2);
 	}
-	return tempstring;
+	return tempcstring;
 }
 
 int Dealer::cardtotal(int x)

@@ -13,16 +13,14 @@
 #include <ostream>
 #include <ctime>
 #include <cstdlib>
-using std::string;
+#include <cstring>
 
 class Deck
 {
     //variables
-    unsigned int shuffleyet;
-    int ii;
-    int* i; //suite
-    int jj;
-    int* j; //value
+    unsigned short int shuffleyet;
+    short int* i = new short int; //suite
+    short int* j = new short int; //value
                 // i , j
     bool deckarray[4][13];
 //private functions
@@ -32,7 +30,7 @@ class Deck
 public:
     Deck();
     ~Deck();
-    string getCard();
+    char * getCard();
     int return_i() const;
     int return_j() const;
     void shuffle();

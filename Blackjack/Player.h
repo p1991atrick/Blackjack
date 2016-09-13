@@ -19,22 +19,22 @@ using std::string;
 class Player
 {   //ints to hold the count 
     unsigned int total;
-    string name;
+    char *name = new char;
 	vector<string> cards;
     bool hasAce;
     //private functions
 
 public:
     Player();
-    Player(string);
+    Player(char *);
     ~Player();
     void calctotal(int);
     void stay();
-    void hit(string);
+    void hit(char *);
     int CardTotal(int);
-    std::string nameout()const;
-    std::string returncards();
-    void setname(string);
+    char * nameout()const;
+    char * returncards();
+    void setname(char *);
     int returnTotal();
 	void reset();
 };

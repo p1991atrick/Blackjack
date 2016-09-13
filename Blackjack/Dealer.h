@@ -25,14 +25,14 @@ class Dealer
 public:
     Dealer();
     ~Dealer();
-    std::string givecard();
+    char * givecard();
     void calctotal(int);
     int returntotal() const;
     int givevalue() ;
     void hit(string);
     int cardtotal(int);
-    std::string returncards();
-    std::string returncard1();
+    char * returncards();
+    char * returncard1();
 	void reset();
 };
 
