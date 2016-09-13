@@ -83,9 +83,9 @@ char * Deck::getCard()
         else if (*j == 7)
             strncpy(tempstring, "9", 1);
         else if (*j == 8)
-            strncpy(tempstring, "10", 1);
+            strncpy(tempstring, "10", 2);
         else if (*j == 9)
-            strncpy(tempstring, "11", 1);
+            strncpy(tempstring, "Jack", 4);
         else if (*j == 10)
             strncpy(tempstring, "Queen", 5);
         else if (*j == 11)

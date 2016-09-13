@@ -71,16 +71,16 @@ int Player::returnTotal()
 {
     return total;
 }
-char * Player::returncards()
+string Player::returncards()
 {
-	char *tempcstring = new char;
+	string tempstring;
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		strcat(tempcstring, cards[i].c_str());
+		tempstring += cards[i];
 		if (i<cards.size()-1)
-			strcat(tempcstring, ", ");
+			tempstring += ", ";
 	}
-	return tempcstring;
+	return tempstring;
 }
 
 int Player::CardTotal(int x)

@@ -33,7 +33,7 @@ public:
     void hit(char *);
     int CardTotal(int);
     char * nameout()const;
-    char * returncards();
+    string returncards();
     void setname(char *);
     int returnTotal();
 	void reset();

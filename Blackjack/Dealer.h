@@ -14,6 +14,7 @@
 
 using std::string;
 using std::vector;
+
 class Dealer
 {
     Deck blackjackDeck[6];
@@ -31,7 +32,7 @@ public:
     int givevalue() ;
     void hit(string);
     int cardtotal(int);
-    char * returncards();
+    string returncards();
     char * returncard1();
 	void reset();
 };

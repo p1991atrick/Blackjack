@@ -67,20 +67,21 @@ int Dealer::returntotal() const
 char * Dealer::returncard1()
 {
 	char *card = new char;
-	strcpy(card, cards[0].c_str());
+	int length = static_cast<int>(strlen(cards[0].c_str())+1);
+	strncpy(card, cards[0].c_str(), length);
 	return card;
 }
 
-char * Dealer::returncards()
+string Dealer::returncards()
 {
-    char *tempcstring = new char;
+	string tempstring;
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		strcat(tempcstring, cards[i].c_str());
+		tempstring += cards[i];
 		if (i<cards.size()-1)
-			strcat(tempcstring, ", ");
+			tempstring += ", ";
 	}
-	return tempcstring;
+	return tempstring;
 }
 
 int Dealer::cardtotal(int x)
