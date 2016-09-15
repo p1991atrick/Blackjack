@@ -22,14 +22,18 @@ class Player
     char *name = new char;
 	vector<string> cards;
     bool hasAce;
+	unsigned int cash;
+	unsigned int currentbid;
     //private functions
 
 public:
     Player();
     Player(char *);
+	Player(char *, int *);
     ~Player();
     void calctotal(int);
-    void stay();
+	int totalcash();
+	void bid(int *);
     void hit(char *);
     int CardTotal(int);
     char * nameout()const;

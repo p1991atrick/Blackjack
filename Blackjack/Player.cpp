@@ -13,7 +13,8 @@ Player::Player()
     total = 0;
 	strncpy(name, "empty", 5);
     hasAce = false;
-
+	cash = 0;
+	currentbid = 0;
 }
 
 Player::Player(char *playername)
@@ -21,6 +22,17 @@ Player::Player(char *playername)
     total = 0;
     strncpy(name, playername, strlen(playername));
     hasAce = false;
+	cash = 0;
+	currentbid = 0;
+}
+
+Player::Player(char *playername, int *startingcash)
+{
+	total = 0;
+	strncpy(name, playername, strlen(playername));
+	hasAce = false;
+	cash = *startingcash;
+	currentbid = 0;
 }
 
 Player::~Player()
@@ -28,6 +40,24 @@ Player::~Player()
     delete name;
 }
 
+int Player::totalcash()
+{
+	return cash;
+}
+
+void Player::bid(int *bidamount)
+{
+	if (*bidamount <= cash)
+	{
+		cash = cash - *bidamount;
+		currentbid = *bidamount;
+	}
+	else if (*bidamount > cash) //all in
+	{
+		currentbid = cash;
+		cash = 0;
+	}
+}
 
 void Player::hit(char *card)
 {

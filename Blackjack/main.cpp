@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
 	char * savefile = new char;
 	strncpy(savefile, CLI_Args(argc, argv), strlen(CLI_Args(argc, argv)));
 	fstream outputfile;
-	outputfile.open(savefile, ios::out | ios::app);
+	outputfile.open(savefile, ios::out | ios::trunc);
 	//Dealer and vars
     Dealer dealer;
     vector<Player> Players;
@@ -69,7 +69,7 @@ char * CLI_Args(int argc, char * argv[])
 				}
 				else if (strlen(returnable) <= 26 && strstr(returnable, ".txt")==0)
 				{
-					strncpy(returnable, arg, strlen(arg));
+					strncpy(returnable, arg, (strlen(arg)+1));
 					strncat(returnable, ".txt", 4);
 				}
 
@@ -146,7 +146,7 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
     cout << currentplayer->nameout() << "'s  turn...\n";
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
     cout << "\nHere are your Cards:\n";
-    cout << setw(sizeof(currentplayer->returncards())+5) << right << currentplayer->returncards() << endl;
+    cout << setw(15) << right << currentplayer->returncards() << endl;
     cout <<"for a total of: " << currentplayer->returnTotal() << endl << endl;
     if(currentplayer->returnTotal() == 21)
     {
@@ -162,7 +162,7 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
                 currentplayer->hit(dealer->givecard());
                 currentplayer->calctotal(dealer->givevalue());
                 cout << "\nYour new cards are: \n";
-                cout << setw(sizeof(currentplayer->returncards())+5) << right << currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << endl << endl;
+                cout << setw(15) << right << currentplayer->returncards() << "\nAnd the total is: " << currentplayer->returnTotal() << endl << endl;
                 if(currentplayer->returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
@@ -291,7 +291,7 @@ void Write_to_file(fstream *fout, Dealer *dealer, vector<Player> * Players, int 
 		*fout << setw(10) << right << "Player " << i+1 << " (" << Players->at(i).nameout() << ") had: " << Players->at(i).returnTotal() << endl;
 		*fout << setw(10) << right << Players->at(i).nameout() << "'s cards are: " << Players->at(i).returncards() << endl;
 	}
-	*fout << endl;
+	*fout << endl << endl << endl;
 
 }
 
