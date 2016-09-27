@@ -40,23 +40,35 @@ Player::~Player()
     delete name;
 }
 
-int Player::totalcash()
+void Player::addcash(double x)
+{
+	cash += x;
+}
+
+double Player::getcash()
 {
 	return cash;
 }
 
-void Player::bid(int *bidamount)
+double Player::setbet(double *betamount, int a)
 {
-	if (*bidamount <= cash)
+	currentbid = *betamount;
+	if (currentbid < cash)
 	{
-		cash = cash - *bidamount;
-		currentbid = *bidamount;
+		cash = cash - currentbid;
+		return 0;
 	}
-	else if (*bidamount > cash) //all in
+	else if (currentbid >= cash && a == 0) //all in
+	{
+		return 1;
+	}
+	else if (currentbid >= cash && a ==1)
 	{
 		currentbid = cash;
 		cash = 0;
+		return 0;
 	}
+	else return 2;//can never get returned
 }
 
 void Player::hit(char *card)
@@ -113,11 +125,6 @@ string Player::returncards()
 	return tempstring;
 }
 
-int Player::CardTotal(int x)
-{
-    return total;
-}
-
 void Player::setname(char * lable)
 {
 	strcpy(name, lable);
@@ -129,5 +136,22 @@ void Player::reset()
 	hasAce = false;
 }
 
+void Player::winner(int w)
+{
+	if (total == 21 && w == 0)
+	{
+		currentbid *= 3;
+		cash += currentbid;
+	}
+	else if (total == 21 && w == 1)
+	{
+		cash += currentbid;
+	}
+	if (total < 21 && w ==0)
+	{
+		currentbid *= 2;
+		cash += currentbid;
+	}
+}
 
 

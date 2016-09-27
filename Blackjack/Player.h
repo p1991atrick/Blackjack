@@ -9,7 +9,7 @@
 #ifndef BlackJackDealer_h
 #define BlackJackDealer_h
 
-#include <ostream>
+#include <iostream>
 #include <vector>
 #include <cstdlib>
 
@@ -22,25 +22,25 @@ class Player
     char *name = new char;
 	vector<string> cards;
     bool hasAce;
-	unsigned int cash;
-	unsigned int currentbid;
-    //private functions
+	double cash;
+	double currentbid;
 
 public:
     Player();
     Player(char *);
 	Player(char *, int *);
     ~Player();
-    void calctotal(int);
-	int totalcash();
-	void bid(int *);
-    void hit(char *);
-    int CardTotal(int);
+	void calctotal(int);//money functions
+	void addcash(double);
+	double getcash();
+	double setbet(double *, int a = 0);
+	void hit(char *);//game functions
     char * nameout()const;
     string returncards();
     void setname(char *);
     int returnTotal();
 	void reset();
+	void winner(int w=0);
 };
 
 #endif /* BlackJackDealer_hpp */

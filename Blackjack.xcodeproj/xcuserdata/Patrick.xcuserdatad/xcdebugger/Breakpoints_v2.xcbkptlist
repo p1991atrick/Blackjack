@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "Player::hit(char *card)"
+            landmarkName = "Player::Player(char *playername, int *startingcash)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blackjack/main.cpp"
-            timestampString = "495489941.169649"
+            timestampString = "496265978.110904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "Display_Board(Dealer *dealer)"
             landmarkType = "9">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blackjack/main.cpp"
-            timestampString = "495489941.070125"
+            timestampString = "496265978.110904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "Playerturn(Player *currentplayer, Dealer *dealer)"
             landmarkType = "9">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blackjack/main.cpp"
-            timestampString = "495490097.519386"
+            timestampString = "496265978.110904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "Playerturn(Player *currentplayer, Dealer *dealer)"
             landmarkType = "9">
          </BreakpointContent>
@@ -186,19 +186,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blackjack/Player.cpp"
-            timestampString = "495491524.734598"
+            timestampString = "496265978.110904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "Player::returncards()"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "Player::calctotal(int x)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blackjack/main.cpp"
@@ -208,6 +208,38 @@
             startingLineNumber = "56"
             endingLineNumber = "56"
             landmarkName = "CLI_Args(int argc, char * argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blackjack/main.cpp"
+            timestampString = "496266813.352979"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "Playerturn(Player *currentplayer, Dealer *dealer)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blackjack/main.cpp"
+            timestampString = "496267237.529187"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "Playerturn(Player *currentplayer, Dealer *dealer)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

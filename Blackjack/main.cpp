@@ -113,6 +113,10 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 			cout << "Enter name of player " << i+1 << ": ";
 			cin >> name;
 			Players->at(i).setname(name);
+			double *cashonhand = new double;
+			cout << "How much money does " << Players->at(i).nameout() << " want to start with?: ";
+			cin >> *cashonhand;
+			Players->at(i).addcash(*cashonhand);
 		}
 	}
     //start game deal
@@ -145,6 +149,28 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
 	string hitstay = "stay";
     cout << currentplayer->nameout() << "'s  turn...\n";
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
+	//bid system     ----------------------------------------------------------------------
+	cout << "You have $" << currentplayer->getcash() << endl;
+	cout << "How much will you bet this hand?: ";
+	double *currentbet = new double;
+	cin >> *currentbet;
+	while (currentplayer->setbet(currentbet) == 1)
+	{
+		cout << "This bet will have you go all in, is this alright? (y/n): ";
+		char *yesno = new char;
+		cin >> yesno;
+		if (*yesno == 'n' || *yesno == 'N')
+		{
+			cout << "Enter new bet: ";
+			cin >> *currentbet;
+			currentplayer->setbet(currentbet);
+		}
+		else
+		{
+			currentplayer->setbet(currentbet, 1);
+		}
+	}
+	//play system
     cout << "\nHere are your Cards:\n";
     cout << setw(15) << right << currentplayer->returncards() << endl;
     cout <<"for a total of: " << currentplayer->returnTotal() << endl << endl;
@@ -251,11 +277,13 @@ void Winners(Dealer *dealer, vector<Player> *Players)
 			if (Players->at(i).returnTotal() > dealer->returntotal() && Players->at(i).returnTotal() <= 21)
 			{
 				cout << Players->at(i).nameout() << " Wins!\n";
+				Players->at(i).winner();
 			}
 
 			else if (Players->at(i).returnTotal() == dealer->returntotal())
 			{
 				cout << Players->at(i).nameout() << " Tied with the dealer.\n";
+				Players->at(i).winner(1);
 			}
 			else
 				cout << Players->at(i).nameout() << " Lost to the dealer.\n";
@@ -267,7 +295,10 @@ void Winners(Dealer *dealer, vector<Player> *Players)
 		for (int i=0;i<Players->size();i++)
 		{
 			if (Players->at(i).returnTotal() <= 21)
+			{
 				cout << Players->at(i).nameout() << " Wins!\n";
+				Players->at(i).winner();
+			}
 		}
 	}
     //dealer has 21
