@@ -9,8 +9,7 @@
 
 int main(int argc, char * argv[])
 {
-	char * savefile = new char;
-	strncpy(savefile, CLI_Args(argc, argv), strlen(CLI_Args(argc, argv)));
+	char *savefile = CLI_Args(argc, argv);
 	fstream outputfile;
 	outputfile.open(savefile, ios::out | ios::trunc);
 	//Dealer and vars
@@ -32,13 +31,15 @@ int main(int argc, char * argv[])
 		Reset_Board(&Players, &dealer);
 	}while(continueplay == 'y' || continueplay == 'Y');
 	outputfile.close(); /* <-- very importaint !! */
+	delete savefile;
     return 0;
 }
 
 
 char * CLI_Args(int argc, char * argv[])
 {
-	char returnable[31];
+	char * returnable = new char[50];
+	strncpy(returnable, "temp", 5);
     if (argc > 1)
     {
         for (int i = 1; i< argc; i++)
@@ -50,29 +51,28 @@ char * CLI_Args(int argc, char * argv[])
             {
                 Help();
             }
-            if (strcmp(arg, "--output-file")==0)
+            if (strncmp(arg, "--output-file", 14)==0)
             {
                 i++;
 				arg = argv[i];
-				if (strlen(returnable) <= 30 && strstr(returnable, ".txt")!=0)
+				if (strlen(arg) <= 30 && strstr(arg, ".txt")!=0)
 				{
-					strncpy(returnable, arg, strlen(arg));
+					strcpy(returnable, arg);
 				}
-				else if (strlen(returnable) > 30 && strstr(returnable, ".txt")!=0)
+				else if (strlen(arg) > 30 && strstr(arg, ".txt")!=0)
 				{
 					strncpy(returnable, arg, 30);
 				}
-				else if (strlen(returnable) > 26 && strstr(returnable, ".txt")==0)
+				else if (strlen(arg) > 26 && strstr(arg, ".txt")==0)
 				{
 					strncpy(returnable, arg, 26);
 					strncat(returnable, ".txt", 4);
 				}
-				else if (strlen(returnable) <= 26 && strstr(returnable, ".txt")==0)
+				else if (strlen(arg) <= 26 && strstr(arg, ".txt")==0)
 				{
 					strncpy(returnable, arg, (strlen(arg)+1));
 					strncat(returnable, ".txt", 4);
 				}
-
             }
         }
     }
@@ -81,8 +81,7 @@ char * CLI_Args(int argc, char * argv[])
         Help();
 		strncpy(returnable, "none", 4);
     }
-	char *temp = returnable;
-    return temp;
+	return returnable;
 }
 
 void Help()
@@ -109,7 +108,7 @@ void Game_setup(Dealer *dealer, vector<Player> *Players, int *numofgames)
 		//build players
 		for(int i = 0; i< numofplayers; i++)
 		{
-			char *name = new char;
+			char name[26];
 			cout << "Enter name of player " << i+1 << ": ";
 			cin >> name;
 			Players->at(i).setname(name);
@@ -146,7 +145,8 @@ void Game_play(Dealer *dealer, vector<Player> *Players)
 
 void Playerturn(Player *currentplayer, Dealer *dealer)
 {
-	string hitstay = "stay";
+	char *hitstay = new char[6];
+	strncpy(hitstay, "stay", 4);
     cout << currentplayer->nameout() << "'s  turn...\n";
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
 	//bid system     ----------------------------------------------------------------------
@@ -183,7 +183,7 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
         do{
             cout << "Would you like to hit or Stay?: ";
             cin >> hitstay;
-            if(hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h")
+            if(strncmp(hitstay, "Hit", 4) || strncmp(hitstay, "hit", 4) || strncmp(hitstay, "H", 2) || strncmp(hitstay, "h", 2))
             {
                 currentplayer->hit(dealer->givecard());
                 currentplayer->calctotal(dealer->givevalue());
@@ -192,18 +192,19 @@ void Playerturn(Player *currentplayer, Dealer *dealer)
                 if(currentplayer->returnTotal() > 21)
                 {
                     cout << "Busted!!\n\n";
-                    hitstay = "stay";
+                    strncpy(hitstay, "stay", 4);
                 }
-                if (currentplayer->returnTotal() ==21)
+                if (currentplayer->returnTotal() == 21)
                 {
                     cout << "Blackjack!! You win\n";
-                    hitstay = "stay";
+                    strncpy(hitstay, "stay", 4);
                 }
             }
-        }while (hitstay == "Hit" || hitstay == "hit" || hitstay == "H" || hitstay == "h");
+        }while (strncmp(hitstay, "Hit", 4) || strncmp(hitstay, "hit", 4) || strncmp(hitstay, "H", 2) || strncmp(hitstay, "h", 2));
         
     }
     system( "read -n 1 -s -p \"Press any key to continue...\"\n" );
+	delete[] hitstay;
 }
 
 void dealerturn(Dealer *dealer)

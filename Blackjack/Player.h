@@ -19,8 +19,8 @@ using std::string;
 class Player
 {   //ints to hold the count 
     unsigned int total;
-    char *name = new char;
-	vector<string> cards;
+    char *name = new char[25];
+	vector<char *> cards;
     bool hasAce;
 	double cash;
 	double currentbid;
@@ -36,7 +36,7 @@ public:
 	double setbet(double *, int a = 0);
 	void hit(char *);//game functions
     char * nameout()const;
-    string returncards();
+    char* returncards();
     void setname(char *);
     int returnTotal();
 	void reset();

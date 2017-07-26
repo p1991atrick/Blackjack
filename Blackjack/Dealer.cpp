@@ -24,7 +24,7 @@ Dealer::~Dealer()
 char * Dealer::givecard()
 {
 	decknumber = rand() % 6;
-	char *toreturn = new char;
+	char *toreturn = new char[35];
 	strcpy(toreturn, blackjackDeck[decknumber].getCard());
     return toreturn;
 }
@@ -34,7 +34,7 @@ int Dealer::givevalue()
     return blackjackDeck[decknumber].return_j();
 }
 
-void Dealer::hit(string card)
+void Dealer::hit(char *card)
 {
 	cards.push_back(card);
 }
@@ -66,20 +66,20 @@ int Dealer::returntotal() const
 
 char * Dealer::returncard1()
 {
-	char *card = new char;
-	int length = static_cast<int>(strlen(cards[0].c_str())+1);
-	strncpy(card, cards[0].c_str(), length);
+	char *card = new char[30];
+	int length = static_cast<int>(strlen(cards[0])+1);
+	strncpy(card, cards[0], length);
 	return card;
 }
 
-string Dealer::returncards()
+char * Dealer::returncards()
 {
-	string tempstring;
+	char *tempstring = new char[50];
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		tempstring += cards[i];
+		strncat(tempstring, cards[i], strlen(cards[i]));
 		if (i<cards.size()-1)
-			tempstring += ", ";
+			strncat(tempstring, ", ", 2);
 	}
 	return tempstring;
 }

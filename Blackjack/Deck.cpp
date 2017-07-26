@@ -64,52 +64,52 @@ char * Deck::getCard()
     CardUsed();
     shuffleyet++;
     //print what it is
-	char *tempstring = new char;
+	char *tempstring = new char[35];
     {//find value
         if(*j == 0)
-            strncpy(tempstring, "2", 1);
+            strncpy(tempstring, "2", 2);
         else if (*j == 1)
-            strncpy(tempstring, "3", 1);
+            strncpy(tempstring, "3", 2);
         else if (*j == 2)
-            strncpy(tempstring, "4", 1);
+            strncpy(tempstring, "4", 2);
         else if (*j == 3)
-            strncpy(tempstring, "5", 1);
+            strncpy(tempstring, "5", 2);
         else if (*j == 4)
-            strncpy(tempstring, "6", 1);
+            strncpy(tempstring, "6", 2);
         else if (*j == 5)
-            strncpy(tempstring, "7", 1);
+            strncpy(tempstring, "7", 2);
         else if (*j == 6)
-            strncpy(tempstring, "8", 1);
+            strncpy(tempstring, "8", 2);
         else if (*j == 7)
-            strncpy(tempstring, "9", 1);
+            strncpy(tempstring, "9", 2);
         else if (*j == 8)
-            strncpy(tempstring, "10", 2);
+            strncpy(tempstring, "10", 3);
         else if (*j == 9)
-            strncpy(tempstring, "Jack", 4);
+            strncpy(tempstring, "Jack", 5);
         else if (*j == 10)
-            strncpy(tempstring, "Queen", 5);
+            strncpy(tempstring, "Queen", 6);
         else if (*j == 11)
-            strncpy(tempstring, "King", 4);
+            strncpy(tempstring, "King", 5);
         else if (*j == 12)
-            strncpy(tempstring, "Ace", 3);
+            strncpy(tempstring, "Ace", 4);
     }
 
     {//find suite
         if(*i == 0)
         {
-            strncat(tempstring, " of Clubs", 9);
+            strncat(tempstring, " of Clubs", 10);
         }
         else if (*i == 1)
         {
-            strncat(tempstring, " of Dimonds", 11);
+            strncat(tempstring, " of Dimonds", 12);
         }
         else if (*i == 2)
         {
-            strncat(tempstring, " of Hearts", 10);
+            strncat(tempstring, " of Hearts", 11);
         }
         else if (*i == 3)
         {
-            strncat(tempstring, " of Spades", 10);
+            strncat(tempstring, " of Spades", 11);
         }
     }
     return tempstring;

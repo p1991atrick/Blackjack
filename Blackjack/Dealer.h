@@ -12,14 +12,13 @@
 #include "Deck.h"
 #include <vector>
 
-using std::string;
 using std::vector;
 
 class Dealer
 {
     Deck blackjackDeck[6];
 	unsigned int total;
-	vector<string> cards;
+	vector<char *> cards;
     bool hasAce;
 	int decknumber;
 
@@ -30,9 +29,9 @@ public:
     void calctotal(int);
     int returntotal() const;
     int givevalue() ;
-    void hit(string);
+    void hit(char *);
     int cardtotal(int);
-    string returncards();
+    char * returncards();
     char * returncard1();
 	void reset();
 };

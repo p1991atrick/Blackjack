@@ -37,7 +37,7 @@ Player::Player(char *playername, int *startingcash)
 
 Player::~Player()
 {
-    delete name;
+    delete[] name;
 }
 
 void Player::addcash(double x)
@@ -113,14 +113,14 @@ int Player::returnTotal()
 {
     return total;
 }
-string Player::returncards()
+char * Player::returncards()
 {
-	string tempstring;
+	char *tempstring = new char[50];
 	for (int i=0;i<=cards.size()-1;i++)
 	{
-		tempstring += cards[i];
+		strncat(tempstring, cards[i], strlen(cards[i]));
 		if (i<cards.size()-1)
-			tempstring += ", ";
+			strncat(tempstring, ", ", 2);
 	}
 	return tempstring;
 }
